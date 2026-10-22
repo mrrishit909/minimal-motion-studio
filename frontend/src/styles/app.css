@@ -20,7 +20,7 @@
   --mm-s1: #646548;
   --mm-s2: #a6422a;
   --mm-shadow: 0 1px 0 rgb(41 32 27 / 0.06), 0 18px 40px -24px rgb(41 32 27 / 0.45);
-  --mm-sans: "Recursive Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mm-sans: "Recursive Variable", "Recursive Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mm-r: 10px;
   --mm-r-control: 8px;
   --mm-fast: 140ms;
@@ -194,7 +194,8 @@
 .mm-root .mm-panel-body .mm-chips { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
 .mm-root .mm-stage { display: grid; gap: 12px; padding: clamp(14px, 2vw, 28px); border-radius: 18px; background: var(--mm-plinth); min-width: 0; }
 .mm-root .mm-stage-bar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
-.mm-root .mm-stage-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-left: auto; }
+/* Always its own row: a row whose wrapping depended on text width could move the page when the font arrives. */
+.mm-root .mm-stage-actions { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: flex-end; flex-basis: 100%; }
 .mm-root .mm-stage-status { margin: 0; font-size: 13.5px; color: var(--mm-ink-2); min-height: 3.1em; }
 .mm-root .mm-frame-area { position: relative; display: grid; justify-items: center; gap: 6px; min-width: 0; }
 .mm-root .mm-ruler { position: relative; height: 10px; border-bottom: 1px solid var(--mm-control); }
@@ -281,7 +282,9 @@
   .mm-root .mm-steps ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .mm-root .mm-steps a { padding: 8px; gap: 6px; }
   .mm-root .mm-stage { border-radius: 14px; }
-  .mm-root .mm-stage-actions { margin-left: 0; }
+  .mm-root .mm-stage-actions { justify-content: flex-start; }
+  .mm-root .mm-top { align-items: flex-start; }
+  .mm-root .mm-nav { flex-basis: 100%; margin-left: -9px; }
   .mm-root .mm-intro { font-size: 15.5px; }
   .mm-root .mm-nav a { padding: 0 9px; }
   .mm-root .mm-presets { grid-template-columns: minmax(0, 1fr); }

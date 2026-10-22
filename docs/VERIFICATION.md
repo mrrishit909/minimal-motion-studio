@@ -15,13 +15,18 @@ including blocked ones, is in `releases/history.json`, with findings and small e
 | live-site | the Pages URL serves the app and its snapshot points at the state branch's latest run | HTTP checks |
 | published-matches-state | every published result file of the latest run is byte-identical to the state branch | `python -m harness verify-published` |
 | browser | 16 checks x 3 widths (390, 768, 1440), all 48 must pass, against the live site: the stage frame is sandboxed (`allow-scripts` only) and shows the composed page; editing updates it and a bad link is explained at its field; a low-contrast seed is adjusted, listed, and every pairing passes; type, space and component controls change the stylesheet; device widths and ruler; motion presets, replay and a reduced-motion preview with no animations; the downloaded zip built independently equals the preview byte for byte and computes the same styles; token propagation on rebuild; hostile brief text stays text in preview and export; hostile imports refused; keyboard and focus; dark theme (axe plus a primary-action contrast check); the studio itself does not animate under reduced motion; history with origin, review and pairings; loading / empty / error-retry / stale states; no AI control for visitors and AI described as owner-only; the preview image; axe (WCAG 2.2 AA serious and critical), horizontal overflow, console errors and failed same-origin requests | Playwright, `frontend/tests/e2e/site.spec.ts` |
-| lighthouse | accessibility >= 0.95, best practices >= 0.9, SEO >= 0.9, performance >= 0.9, LCP <= 2.5 s, CLS <= 0.1 on the live site, phone and desktop | Lighthouse CLI 13.5.0, `frontend/scripts/lighthouse.mjs` |
+| lighthouse | accessibility >= 0.95, best practices >= 0.9, SEO >= 0.9, performance >= 0.9, LCP <= 2.5 s, CLS <= 0.1 on the live site, phone and desktop, each the median of three runs | Lighthouse CLI 13.5.0, `frontend/scripts/lighthouse.mjs` |
 
-Both Lighthouse runs use its default method (simulated throttling; the mobile profile for the phone,
-the desktop preset for desktop). A phone run with applied (devtools) throttling is recorded alongside as
-information: on a CI runner it adds the runner's real network path to the throttled one and varies from
-run to run (2.8 s LCP on the first live check, against 2.1 s simulated). On the local production build the
-two methods disagreed the other way (2.2 s applied, 2.6 s simulated); the gate runs against the live site.
+Lighthouse runs use its default method (simulated throttling; the mobile profile for the phone, the
+desktop preset for desktop). Single runs vary near the LCP limit (1.8 to 2.6 s on the live site across
+runs), so each form factor runs three times and the gate reads the median, as Lighthouse's variability
+guidance recommends; every individual value is kept in `lighthouse/summary.json`. One phone run with
+applied (devtools) throttling is recorded alongside as information.
+
+The first live checks also exposed an intermittent layout shift (CLS 0.23 in about two runs of three)
+that only Lighthouse caught: a trace showed it inside the preview frame (`about:srcdoc`), whose first
+layout was counted before the generated page settled. A new preview frame now stays hidden until its
+document has loaded and laid out, then fades in; CLS was 0 in seven of seven runs afterwards.
 
 Every published run also carries its own review (`review.json`): axe at three widths, overflow, keyboard
 operation of every question, visible focus, reduced motion and normal motion, and the byte comparison of

@@ -16,7 +16,7 @@
      "kind": "command", "argv": ["python", "-m", "harness", "verify-published", "--state-dir", "state"], "timeout": 300},
     {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (sandboxed preview, brief editing and field errors, palette adjustments and pairings, type, space and components, device widths, motion and reduced-motion preview, downloaded export built independently and matching the preview byte for byte and in computed styles, token propagation, injection, hostile import, keyboard, dark theme, studio reduced motion, history, states, no AI control for visitors, axe, overflow, console)",
      "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 48},
-    {"id": "lighthouse", "title": "Lighthouse CLI on the live site: accessibility at least 0.95, best practices and SEO at least 0.9, performance at least 0.9, LCP at most 2.5 s and CLS at most 0.1, for phone and desktop (Lighthouse default simulated throttling)",
+    {"id": "lighthouse", "title": "Lighthouse CLI on the live site: accessibility at least 0.95, best practices and SEO at least 0.9, performance at least 0.9, LCP at most 2.5 s and CLS at most 0.1, for phone and desktop, each the median of three runs (Lighthouse default simulated throttling)",
      "kind": "evidence-file", "file": "lighthouse/summary.json", "min_passed": 12}
   ],
   "subjective": [

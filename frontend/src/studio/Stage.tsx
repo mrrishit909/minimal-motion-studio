@@ -39,6 +39,19 @@ export function PreviewFrame({ html, src, device, maxHeight, title, reduced = fa
   const scale = avail ? Math.min(1, avail / d.width, maxHeight / d.height) : 0;
   const box = useRef<HTMLDivElement>(null);
   const prevWidth = useRef<number | null>(null);
+  // A new frame stays hidden until its document has loaded and laid out, so its first layout is never
+  // seen (or counted as a layout shift); then it fades in. Later edits update the visible frame in place.
+  const [shown, setShown] = useState(false);
+  const frameKey = `${replay}-${reduced}`;
+  useEffect(() => setShown(false), [frameKey, src]);
+  const reveal = (e: React.SyntheticEvent<HTMLIFrameElement>) => {
+    if (shown) return;
+    const el = e.currentTarget;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      setShown(true);
+      animate(el, [{ opacity: 0 }, { opacity: 1 }], { duration: 220 });
+    }));
+  };
 
   // Device change: the frame grows or shrinks from its previous on-screen width (uniform scale, transform only).
   useLayoutEffect(() => {
@@ -64,12 +77,13 @@ export function PreviewFrame({ html, src, device, maxHeight, title, reduced = fa
           </p>
           <div className="mm-frame" ref={box} style={{ width: d.width * scale, height: d.height * scale }}>
             {html === undefined && !src ? <div className="mm-skel" style={{ width: "100%", height: "100%" }} aria-hidden /> : <iframe
-              key={`${replay}-${reduced}`}
+              key={frameKey}
+              onLoad={reveal}
               title={title}
               sandbox="allow-scripts"
               referrerPolicy="no-referrer"
               {...(src ? { src } : { srcDoc: reduced && html ? withReducedMotion(html) : html })}
-              style={{ width: d.width, height: d.height, transform: `scale(${scale})` }}
+              style={{ width: d.width, height: d.height, transform: `scale(${scale})`, visibility: shown ? "visible" : "hidden" }}
             />}
           </div>
         </>
