@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrrishit909/minimal-motion-studio/schemas/outputs.schema.json",
+  "title": "Minimal Motion Studio run outputs",
+  "description": "One $defs entry per JSON result file written by `node src/engine/cli.ts run` (manifest.json, summary.json, review.json); validate a file with {\"$ref\": \"#/$defs/<name>\"}. JSON files are written with sorted keys, two-space indent and a final newline; they hold no wall-clock time and no absolute path. input_manifest_hash is sha256 over the canonical request JSON: keys sorted, separators ',' and ':', every character outside printable ASCII escaped as lower-case \\uXXXX (byte-identical to Python json.dumps(request, sort_keys=True, separators=(',', ':'))).",
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "origin": { "enum": ["studio", "ai-candidate", "fixture"] },
+    "template": { "enum": ["studio", "shopfront", "launch"] },
+    "preset": { "enum": ["still", "gentle", "crisp", "lively"] },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "engine", "input_manifest_hash", "origin", "candidate_sha256"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "engine": { "const": "minimal-motion-studio 1.0.0" },
+        "input_manifest_hash": { "$ref": "#/$defs/sha" },
+        "origin": { "$ref": "#/$defs/origin" },
+        "candidate_sha256": { "description": "sha256 of the verified AI candidate file; null unless origin is ai-candidate", "anyOf": [{ "$ref": "#/$defs/sha" }, { "type": "null" }] }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "headline", "template", "origin", "motion_preset", "export_identical", "counts", "files"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "headline": { "description": "One plain sentence. Starts with 'AI-proposed brief: ' exactly when origin is ai-candidate.", "type": "string", "minLength": 1, "maxLength": 400 },
+        "template": { "$ref": "#/$defs/template" },
+        "origin": { "$ref": "#/$defs/origin" },
+        "motion_preset": { "$ref": "#/$defs/preset" },
+        "export_identical": { "description": "the exported build.mjs, run with node, produced exactly the page the studio previews", "const": true },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pairings", "pairings_pass", "adjustments", "axe_violations", "widths", "overflow_widths", "console_errors", "failed_requests"],
+          "properties": {
+            "pairings": { "$ref": "#/$defs/count" },
+            "pairings_pass": { "$ref": "#/$defs/count" },
+            "adjustments": { "$ref": "#/$defs/count" },
+            "axe_violations": { "description": "violated axe rules summed over the widths", "$ref": "#/$defs/count" },
+            "widths": { "$ref": "#/$defs/count" },
+            "overflow_widths": { "$ref": "#/$defs/count" },
+            "console_errors": { "$ref": "#/$defs/count" },
+            "failed_requests": { "$ref": "#/$defs/count" }
+          }
+        },
+        "files": {
+          "description": "every result file except summary.json, sorted by name",
+          "type": "array",
+          "minItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "sha256", "bytes"],
+            "properties": {
+              "name": { "enum": ["adjustments.json", "manifest.json", "package.zip", "report.md", "review.json", "site.html", "spec.json", "tokens.json"] },
+              "sha256": { "$ref": "#/$defs/sha" },
+              "bytes": { "$ref": "#/$defs/count" }
+            }
+          }
+        }
+      }
+    },
+    "widthResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "axe_violations", "overflow_px", "console_errors", "failed_requests", "details_total", "details_keyboard_ok", "focus_visible"],
+      "properties": {
+        "width": { "enum": [390, 768, 1440] },
+        "height": { "enum": [844, 1024, 900] },
+        "axe_violations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "impact", "nodes", "help"],
+            "properties": {
+              "id": { "type": "string" },
+              "impact": { "enum": ["minor", "moderate", "serious", "critical", null] },
+              "nodes": { "$ref": "#/$defs/count" },
+              "help": { "type": "string" }
+            }
+          }
+        },
+        "overflow_px": { "description": "document width beyond the viewport; 0 means no horizontal scroll", "$ref": "#/$defs/count" },
+        "console_errors": { "description": "console errors and uncaught exceptions, file locations replaced by <site>", "type": "array", "items": { "type": "string", "maxLength": 300 } },
+        "failed_requests": { "description": "requests other than the page itself (the page must make none)", "$ref": "#/$defs/count" },
+        "details_total": { "$ref": "#/$defs/count" },
+        "details_keyboard_ok": { "description": "<details> that opened with Enter on their focused summary and closed again", "$ref": "#/$defs/count" },
+        "focus_visible": { "description": "the first link shows a focus outline when reached with Tab", "type": "boolean" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "browser", "widths", "motion", "flags"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "browser": { "type": "string" },
+        "widths": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/widthResult" } },
+        "motion": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["preset", "reduced_animations", "animations_started"],
+          "properties": {
+            "preset": { "$ref": "#/$defs/preset" },
+            "reduced_animations": { "description": "document.getAnimations().length plus animate() calls after load with reduced motion emulated; must be 0", "$ref": "#/$defs/count" },
+            "animations_started": { "description": "Element.animate() calls during load with normal motion; must be 0 for still and above 0 otherwise", "$ref": "#/$defs/count" }
+          }
+        },
+        "flags": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["axe_clean", "no_overflow", "no_console_errors", "no_requests", "details_keyboard", "focus_visible", "reduced_motion", "motion"],
+          "properties": {
+            "axe_clean": { "type": "boolean" },
+            "no_overflow": { "type": "boolean" },
+            "no_console_errors": { "type": "boolean" },
+            "no_requests": { "type": "boolean" },
+            "details_keyboard": { "type": "boolean" },
+            "focus_visible": { "type": "boolean" },
+            "reduced_motion": { "type": "boolean" },
+            "motion": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}

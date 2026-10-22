@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python (lint, harness)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - run: uv sync --frozen --python 3.12
+      - run: uv run --frozen ruff check .
+      - run: uv run --frozen pytest
+      - run: uv run --frozen python scripts/secret_scan.py
+
+  frontend:
+    name: Engine and studio (types, engine gates, AI-candidate verifier, build, browser checks)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - working-directory: frontend
+        run: npm ci && npx playwright install --with-deps chromium
+      - run: uv sync --frozen --python 3.12
+      - name: Real hooks on real engine output (must not skip here)
+        env:
+          MMS_REQUIRE_ENGINE: "1"
+        run: uv run --frozen pytest tests/harness/test_project_hooks.py
+      - name: Real fixture snapshot (engine output, labelled as fixture)
+        run: uv run --frozen python scripts/fixture_snapshot.py --out frontend/public/data
+      - working-directory: frontend
+        run: npm run typecheck
+      - working-directory: frontend
+        run: npm test
+      - name: AI-candidate verifier on committed fixtures (clean accepted, hostile rejected)
+        working-directory: frontend
+        run: |
+          node src/engine/cli.ts verify-candidate --candidate ../fixtures/ai/clean-candidate.json --out "$RUNNER_TEMP/clean-request.json"
+          if node src/engine/cli.ts verify-candidate --candidate ../fixtures/ai/hostile-candidate.json --out "$RUNNER_TEMP/hostile-request.json"; then
+            echo "the hostile fixture was accepted"; exit 1
+          fi
+      - working-directory: frontend
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+        run: npm run build
+      - working-directory: frontend
+        env:
+          E2E_EVIDENCE_DIR: ${{ github.workspace }}/evidence/e2e
+        run: npm run e2e
+      - if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-browser-evidence
+          path: evidence/e2e
+          retention-days: 7
+          if-no-files-found: warn

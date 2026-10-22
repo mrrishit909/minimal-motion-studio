@@ -1,0 +1,17 @@
+name: Generation run request
+description: Compose, build and review a site from a brand brief, deterministically. Runs start automatically only for the repository owner; other requests wait for owner approval. No AI is involved.
+title: "[generation] "
+labels: ["type:run"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paste a brief exported from the studio (Export brief, then Copy). The run validates it against `schemas/request.schema.json`, composes the site with the deterministic templates, builds the exported package on its own, and publishes a review (contrast pairings, axe at 390, 768 and 1440 px, keyboard and reduced-motion checks) to the run history. A GitHub sign-in is required to open an issue. Nothing here can trigger AI inference; AI-assisted generation is an owner-only workflow.
+  - type: textarea
+    id: brief
+    attributes:
+      label: Brief (JSON)
+      description: The brand brief as JSON (the studio's Export brief button produces it).
+      render: json
+    validations:
+      required: true

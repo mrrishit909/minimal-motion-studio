@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "name": "Minimal Motion Studio",
+  "short_description": "A brand-to-website studio: a structured brief becomes contrast-checked tokens, type and spacing scales, component variants and Web Animations motion, previewed at three widths and exported as a dependency-free package that builds byte-identical to the preview.",
+  "repository_url": "https://github.com/mrrishit909/minimal-motion-studio",
+  "live_url": "https://mrrishit909.github.io/minimal-motion-studio/",
+  "preview_image": "https://mrrishit909.github.io/minimal-motion-studio/preview.jpg",
+  "tags": ["design-systems", "design-tokens", "accessibility", "web-animations", "react", "typescript", "vite", "json-schema", "ajv", "culori", "playwright", "axe-core", "lighthouse", "github-actions"],
+  "capabilities": [
+    "One JSON Schema brief contract shared by the browser (Ajv) and the GitHub harness (jsonschema)",
+    "OKLCH palette derivation; every foreground/background pairing the stylesheet uses is checked, adjustments are listed, and the build re-checks them",
+    "Type and spacing scales, component variants and four motion presets on the Web Animations API, with a reduced-motion preview",
+    "Phone, tablet and desktop previews of the exact exported page in a sandboxed frame",
+    "Exported package with no dependencies: npm run build regenerates tokens CSS, re-checks contrast and writes one page with a hash-based CSP",
+    "Published generation runs build the package independently and review it with Playwright and axe-core at three widths",
+    "Owner-only AI-proposed briefs through GitHub Actions: the model returns data only and a secret-free job verifies it before the ordinary run"
+  ],
+  "data_limitations": [
+    "Example brands are fictional",
+    "Exports use system font stacks, so typography varies by device",
+    "AI-proposed briefs need an inference secret the owner configures; none is configured, so none has run",
+    "The history shows a snapshot of the state branch, not live data"
+  ],
+  "integration": {
+    "standalone": "https://mrrishit909.github.io/minimal-motion-studio/",
+    "iframe": "https://mrrishit909.github.io/minimal-motion-studio/#/",
+    "module": "https://mrrishit909.github.io/minimal-motion-studio/lib/minimal-motion-studio.js",
+    "stylesheet": "https://mrrishit909.github.io/minimal-motion-studio/lib/minimal-motion-studio.css",
+    "entry_point": "MinimalMotionStudioApp (React component) or mount(element, config)",
+    "data_url": "https://mrrishit909.github.io/minimal-motion-studio/data/",
+    "docs": "https://github.com/mrrishit909/minimal-motion-studio/blob/main/docs/PORTFOLIO_INTEGRATION.md"
+  },
+  "build_version": "1.0.0"
+}

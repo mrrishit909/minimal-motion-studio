@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrrishit909/minimal-motion-studio/schemas/request.schema.json",
+  "title": "Minimal Motion Studio generation request",
+  "description": "A run composes, builds and reviews one site from a brand spec. The spec under $defs/spec is the single brief contract: the studio validates it with Ajv, the harness with jsonschema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["spec", "origin"],
+  "properties": {
+    "spec": { "$ref": "#/$defs/spec" },
+    "origin": {
+      "description": "studio: a brief written in the studio or the issue form. ai-candidate: a brief proposed by the owner-only AI workflow and verified without secrets. fixture: a committed test brief.",
+      "enum": ["studio", "ai-candidate", "fixture"]
+    },
+    "candidate_sha256": {
+      "description": "Only for ai-candidate: sha256 of the verified candidate file.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$(?![\\s\\S])"
+    }
+  },
+  "$defs": {
+    "line": { "type": "string", "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F\\uD800-\\uDFFF]*$(?![\\s\\S])" },
+    "required_line": { "type": "string", "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F\\uD800-\\uDFFF]*[^\\s\\u0000-\\u001F\\u007F-\\u009F\\uD800-\\uDFFF][^\\u0000-\\u001F\\u007F-\\u009F\\uD800-\\uDFFF]*$(?![\\s\\S])" },
+    "paragraph": { "type": "string", "pattern": "^[^\\u0000-\\u0009\\u000B-\\u001F\\u007F-\\u009F\\uD800-\\uDFFF]*$(?![\\s\\S])" },
+    "hex": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$(?![\\s\\S])" },
+    "voice": { "enum": ["humanist", "transitional", "old-style", "geometric", "industrial", "rounded", "mono"] },
+    "spec": {
+      "title": "Brand spec",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "template", "brand", "items", "faqs", "palette", "type", "space", "components", "motion"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "template": { "enum": ["studio", "shopfront", "launch"] },
+        "brand": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "tagline", "summary", "cta_label", "cta_href", "contact", "location", "hours", "note"],
+          "properties": {
+            "name": { "type": "string", "$ref": "#/$defs/required_line", "minLength": 1, "maxLength": 40 },
+            "tagline": { "type": "string", "$ref": "#/$defs/required_line", "minLength": 1, "maxLength": 90 },
+            "summary": { "type": "string", "$ref": "#/$defs/paragraph", "maxLength": 320 },
+            "cta_label": { "type": "string", "$ref": "#/$defs/required_line", "minLength": 1, "maxLength": 28 },
+            "cta_href": {
+              "type": "string",
+              "maxLength": 200,
+              "pattern": "^(https://[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)+(:[0-9]{1,5})?(/[A-Za-z0-9._~%!$&'()*+,;=:@/-]*)?(\\?[A-Za-z0-9._~%!$&'()*+,;=:@/?-]*)?(#[A-Za-z0-9._~%!$&'()*+,;=:@/?-]*)?|mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)+|tel:\\+?[0-9 ()-]{3,20})$(?![\\s\\S])"
+            },
+            "contact": { "type": "string", "$ref": "#/$defs/line", "maxLength": 120 },
+            "location": { "type": "string", "$ref": "#/$defs/line", "maxLength": 120 },
+            "hours": { "type": "string", "$ref": "#/$defs/line", "maxLength": 120 },
+            "note": { "type": "string", "$ref": "#/$defs/line", "maxLength": 160 }
+          }
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "text", "meta"],
+            "properties": {
+              "title": { "type": "string", "$ref": "#/$defs/required_line", "minLength": 1, "maxLength": 48 },
+              "text": { "type": "string", "$ref": "#/$defs/line", "maxLength": 160 },
+              "meta": { "type": "string", "$ref": "#/$defs/line", "maxLength": 24 }
+            }
+          }
+        },
+        "faqs": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["q", "a"],
+            "properties": {
+              "q": { "type": "string", "$ref": "#/$defs/required_line", "minLength": 1, "maxLength": 100 },
+              "a": { "type": "string", "$ref": "#/$defs/paragraph", "minLength": 1, "maxLength": 320 }
+            }
+          }
+        },
+        "palette": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "canvas", "ink", "accent", "support"],
+          "properties": {
+            "mode": { "enum": ["light", "dark"] },
+            "canvas": { "$ref": "#/$defs/hex" },
+            "ink": { "$ref": "#/$defs/hex" },
+            "accent": { "$ref": "#/$defs/hex" },
+            "support": { "$ref": "#/$defs/hex" }
+          }
+        },
+        "type": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["heading", "body", "base_px", "ratio", "heading_weight", "measure_ch"],
+          "properties": {
+            "heading": { "$ref": "#/$defs/voice" },
+            "body": { "$ref": "#/$defs/voice" },
+            "base_px": { "type": "integer", "minimum": 15, "maximum": 20 },
+            "ratio": { "enum": ["1.125", "1.2", "1.25", "1.333", "1.414", "1.5"] },
+            "heading_weight": { "enum": [400, 500, 600, 700, 800] },
+            "measure_ch": { "type": "integer", "minimum": 45, "maximum": 80 }
+          }
+        },
+        "space": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base_px", "density"],
+          "properties": {
+            "base_px": { "enum": [4, 6, 8] },
+            "density": { "enum": ["compact", "comfortable", "airy"] }
+          }
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["button", "surface", "radius", "header"],
+          "properties": {
+            "button": { "enum": ["solid", "outline", "pill", "underline"] },
+            "surface": { "enum": ["flat", "outlined", "raised"] },
+            "radius": { "enum": ["none", "soft", "round"] },
+            "header": { "enum": ["inline", "centered"] }
+          }
+        },
+        "motion": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["preset", "speed_pct", "stagger_ms"],
+          "properties": {
+            "preset": { "enum": ["still", "gentle", "crisp", "lively"] },
+            "speed_pct": { "type": "integer", "minimum": 50, "maximum": 200, "multipleOf": 10 },
+            "stagger_ms": { "type": "integer", "minimum": 0, "maximum": 160, "multipleOf": 10 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "rubric_version": "1.0",
+  "project": "minimal-motion-studio",
+  "note": "Fixed rubric for the Outcome Verification Loop. Changing any byte requires updating rubric/rubric.lock in a reviewed commit; the loop refuses to run gates against an unlocked rubric. Graders read this file; they never write it.",
+  "max_repair_rounds": 3,
+  "hard_gates": [
+    {"id": "export-gates", "title": "Exported packages build independently with Node alone and byte-match the studio's build; tokens propagate from tokens.json to every use; contrast is checked on the actual pairings at derivation and again at build; brief text can never become markup or script; output is deterministic; the AI-candidate verifier rejects hostile and credential-bearing candidates",
+     "kind": "evidence-file", "file": "export-gates/summary.json", "min_passed": 64},
+    {"id": "harness", "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards",
+     "kind": "pytest", "args": "tests/harness", "timeout": 600},
+    {"id": "secret-scan", "title": "No credentials in the repository or in the live site's shipped assets",
+     "kind": "command", "argv": ["python", "scripts/secret_scan.py", "--live"], "timeout": 300},
+    {"id": "live-site", "title": "Live Pages site loads and its data snapshot points at the state branch's latest run",
+     "kind": "live", "marker": "data-app=\"minimal-motion-studio\""},
+    {"id": "published-matches-state", "title": "Published result files are byte-identical to the accepted computation",
+     "kind": "command", "argv": ["python", "-m", "harness", "verify-published", "--state-dir", "state"], "timeout": 300},
+    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (sandboxed preview, brief editing and field errors, palette adjustments and pairings, type, space and components, device widths, motion and reduced-motion preview, downloaded export built independently and matching the preview byte for byte and in computed styles, token propagation, injection, hostile import, keyboard, dark theme, studio reduced motion, history, states, no AI control for visitors, axe, overflow, console)",
+     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 48},
+    {"id": "lighthouse", "title": "Lighthouse CLI on the live site: accessibility at least 0.95, best practices and SEO at least 0.9, performance at least 0.9, LCP at most 2.5 s and CLS at most 0.1, for phone (applied throttling) and desktop",
+     "kind": "evidence-file", "file": "lighthouse/summary.json", "min_passed": 12}
+  ],
+  "subjective": [
+    {"id": "hierarchy", "title": "The stage is the clear focus; controls stay quiet and ordered"},
+    {"id": "typography", "title": "Deliberate type choices and scale, in the studio and in generated pages"},
+    {"id": "spacing", "title": "Purposeful negative space and rhythm"},
+    {"id": "palette", "title": "Restrained warm palette with clear roles; meaning never by colour alone"},
+    {"id": "motion", "title": "Motion explains change (device width, step, preset); reduced-motion alternative intact"},
+    {"id": "responsive", "title": "Deliberate mobile, tablet and desktop compositions"},
+    {"id": "distinctiveness", "title": "Reads as a spacious interactive design atelier, not a generic dashboard or form"},
+    {"id": "honesty", "title": "AI generation is described only as the owner-only workflow; visitors are never offered it"},
+    {"id": "contract-fidelity", "title": "Follows docs/DESIGN_CONTRACT.md"}
+  ]
+}

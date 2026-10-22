@@ -1,0 +1,118 @@
+{
+  "project": "minimal-motion-studio",
+  "display_name": "Minimal Motion Studio",
+  "owner": "mrrishit909",
+  "repo": "minimal-motion-studio",
+  "pages_url": "https://mrrishit909.github.io/minimal-motion-studio/",
+  "schema_version": "1.0",
+  "package": "harness",
+  "state_branch": "state",
+  "engine_paths": [
+    "frontend/src/engine",
+    "frontend/package-lock.json",
+    "schemas/request.schema.json"
+  ],
+  "default_branch": "main",
+  "limits": {
+    "max_runs_per_month": 40,
+    "max_open_requests": 5,
+    "max_run_bytes": 2000000,
+    "max_retained_run_dirs": 30,
+    "max_index_entries": 500,
+    "max_snapshot_runs": 8,
+    "compute_timeout_minutes": 20,
+    "stale_running_minutes": 90,
+    "max_repair_rounds": 3,
+    "inference_budget_usd": 1.0,
+    "max_reconcile_actions": 5
+  },
+  "form": [
+    {
+      "label": "Brief (JSON)",
+      "param": "spec",
+      "type": "json"
+    }
+  ],
+  "constants": {
+    "origin": "studio"
+  },
+  "scheduled_request": {
+    "origin": "fixture",
+    "spec": {
+      "schema_version": "1.0",
+      "template": "studio",
+      "brand": {
+        "name": "Fieldnote Studio",
+        "tagline": "Gardens planned around how you actually use them",
+        "summary": "A two-person garden design practice. We survey the light, soil and drainage first, then draw a planting plan you can build in stages, with or without us.",
+        "cta_label": "Book a survey",
+        "cta_href": "mailto:hello@fieldnote.example",
+        "contact": "hello@fieldnote.example",
+        "location": "Studio 4, Tannery Yard",
+        "hours": "Site visits Tuesday to Friday",
+        "note": "Booking surveys for spring planting now"
+      },
+      "items": [
+        {
+          "title": "Garden survey",
+          "text": "A half-day visit to measure light, soil and drainage, followed by a written summary within a week.",
+          "meta": "Half day"
+        },
+        {
+          "title": "Planting plan",
+          "text": "A scaled plan with a plant list, sourcing notes and a first-year care calendar.",
+          "meta": "2 to 3 weeks"
+        },
+        {
+          "title": "Build oversight",
+          "text": "We brief the landscaper you choose and check the work at each stage, so the plan survives the build.",
+          "meta": "Per project"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Do you build the gardens yourselves?",
+          "a": "No. We design and oversee. We can recommend landscapers we have worked with, or brief one you already trust."
+        },
+        {
+          "q": "How far do you travel?",
+          "a": "Up to about an hour from the studio. Further visits are quoted separately before anything is booked."
+        },
+        {
+          "q": "What does a survey cost?",
+          "a": "A fixed fee, agreed before the visit. If you go on to commission a planting plan, the survey fee is taken off it."
+        }
+      ],
+      "palette": {
+        "mode": "light",
+        "canvas": "#FFF6E8",
+        "ink": "#29201B",
+        "accent": "#646548",
+        "support": "#E8D7BF"
+      },
+      "type": {
+        "heading": "old-style",
+        "body": "humanist",
+        "base_px": 17,
+        "ratio": "1.333",
+        "heading_weight": 500,
+        "measure_ch": 64
+      },
+      "space": {
+        "base_px": 8,
+        "density": "airy"
+      },
+      "components": {
+        "button": "outline",
+        "surface": "outlined",
+        "radius": "none",
+        "header": "inline"
+      },
+      "motion": {
+        "preset": "gentle",
+        "speed_pct": 100,
+        "stagger_ms": 60
+      }
+    }
+  }
+}
