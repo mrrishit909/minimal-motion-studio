@@ -1,0 +1,60 @@
+{
+  "counts": {
+    "adjustments": 0,
+    "axe_violations": 0,
+    "console_errors": 0,
+    "failed_requests": 0,
+    "overflow_widths": 0,
+    "pairings": 16,
+    "pairings_pass": 16,
+    "widths": 3
+  },
+  "export_identical": true,
+  "files": [
+    {
+      "bytes": 3,
+      "name": "adjustments.json",
+      "sha256": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 223,
+      "name": "manifest.json",
+      "sha256": "sha256:b8340b5f5035e48a579376fd45da547fece538322499e351f3de1fe9f92056d5"
+    },
+    {
+      "bytes": 51000,
+      "name": "package.zip",
+      "sha256": "sha256:d14518800c69e6ef92b3a498aae51a8132933d47f447d74561efe752e0af5578"
+    },
+    {
+      "bytes": 2369,
+      "name": "report.md",
+      "sha256": "sha256:811683f2deaafb2c9d659cf40a2bf60cbf0a2d5f4ee2dd631f0a8d15d39eb921"
+    },
+    {
+      "bytes": 1159,
+      "name": "review.json",
+      "sha256": "sha256:529c6a2d0008847dd4141c547d0145e814b71a335f10715d3990289503f29dec"
+    },
+    {
+      "bytes": 26338,
+      "name": "site.html",
+      "sha256": "sha256:927c5caddd638ea84b26436381c15ca1db71103fa1c0d71a440a8b67ccd702c7"
+    },
+    {
+      "bytes": 2726,
+      "name": "spec.json",
+      "sha256": "sha256:463788b9be09c0b94dbe8f3f0bf8e897437bb0db03034d08b44d4174e2708212"
+    },
+    {
+      "bytes": 5432,
+      "name": "tokens.json",
+      "sha256": "sha256:d542f872d0b3163f77266ab11235543064d0f45c77949b1114eb31dbd3c58976"
+    }
+  ],
+  "headline": "Shopfront template for Marrow Lane Bakehouse: 16 of 16 contrast pairings pass, 0 axe violations at 3 widths, export builds identically.",
+  "motion_preset": "crisp",
+  "origin": "studio",
+  "schema_version": "1.0",
+  "template": "shopfront"
+}

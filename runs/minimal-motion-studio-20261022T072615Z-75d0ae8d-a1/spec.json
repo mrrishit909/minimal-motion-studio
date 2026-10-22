@@ -1,0 +1,91 @@
+{
+  "brand": {
+    "contact": "orders@marrowlane.example",
+    "cta_href": "https://marrowlane.example/orders",
+    "cta_label": "Order for collection",
+    "hours": "Wednesday to Sunday, 7:30 to 15:00",
+    "location": "14 Marrow Lane, by the canal bridge",
+    "name": "Marrow Lane Bakehouse",
+    "note": "Closed Monday and Tuesday for baking classes",
+    "summary": "A small bakery by the canal bridge. Loaves are shaped the evening before and baked from four in the morning, so the first batch is out when we open.",
+    "tagline": "Slow-fermented bread, baked before the street wakes"
+  },
+  "components": {
+    "button": "pill",
+    "header": "centered",
+    "radius": "round",
+    "surface": "raised"
+  },
+  "faqs": [
+    {
+      "a": "Yes, with 48 hours' notice for up to 20 loaves. Send the date and what you need, and we will confirm by email.",
+      "q": "Can I order large quantities?"
+    },
+    {
+      "a": "Our kitchen uses wheat flour all day, so we cannot promise anything is free of gluten. The almond cake contains no wheat flour.",
+      "q": "Is anything gluten free?"
+    },
+    {
+      "a": "Not yet. Orders are for collection from the shop during opening hours.",
+      "q": "Do you deliver?"
+    }
+  ],
+  "items": [
+    {
+      "meta": "$7.50",
+      "text": "Whole rye with caraway, fermented for 36 hours. A dense 900 g loaf that keeps for a week.",
+      "title": "Rye sourdough"
+    },
+    {
+      "meta": "$6.00",
+      "text": "Our everyday loaf: white and wholemeal flour, a crackling crust and an open crumb.",
+      "title": "Country white"
+    },
+    {
+      "meta": "$6.50",
+      "text": "Spelt, sunflower, pumpkin and linseed, baked in a tin for easy slicing.",
+      "title": "Seeded spelt"
+    },
+    {
+      "meta": "$3.75",
+      "text": "Laminated dough knotted with cardamom sugar, baked through the morning until sold out.",
+      "title": "Cardamom bun"
+    },
+    {
+      "meta": "$4.25 a slice",
+      "text": "Ground almonds, olive oil and orange, made without wheat flour.",
+      "title": "Almond cake"
+    },
+    {
+      "meta": "$3.00",
+      "text": "Brewed in small batches through the day. Oat milk at no extra charge.",
+      "title": "Filter coffee"
+    }
+  ],
+  "motion": {
+    "preset": "crisp",
+    "speed_pct": 100,
+    "stagger_ms": 40
+  },
+  "palette": {
+    "accent": "#5A171B",
+    "canvas": "#E8D7BF",
+    "ink": "#29201B",
+    "mode": "light",
+    "support": "#A6422A"
+  },
+  "schema_version": "1.0",
+  "space": {
+    "base_px": 8,
+    "density": "comfortable"
+  },
+  "template": "shopfront",
+  "type": {
+    "base_px": 18,
+    "body": "humanist",
+    "heading": "transitional",
+    "heading_weight": 700,
+    "measure_ch": 60,
+    "ratio": "1.25"
+  }
+}
