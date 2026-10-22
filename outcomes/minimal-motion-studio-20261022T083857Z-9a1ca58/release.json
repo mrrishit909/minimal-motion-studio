@@ -1,0 +1,116 @@
+{
+  "blocked_reason": "hard gates failing: export-gates",
+  "created_at": "2026-10-22T08:38:57Z",
+  "defect_batch_id": "0ae2e9eff343",
+  "evidence_dir": "outcomes/minimal-motion-studio-20261022T083857Z-9a1ca58/",
+  "findings": [
+    {
+      "detail": "sha256:ed406e46dae65a6d81f3f8899137d9f4001ff2eb4604a16d2d8d601dca0d16dd",
+      "evidence_paths": [],
+      "id": "rubric-integrity",
+      "kind": "integrity",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Rubric matches its review lock"
+    },
+    {
+      "detail": "87 passed, 0 failed",
+      "evidence_paths": [
+        "export-gates/summary.json"
+      ],
+      "id": "export-gates",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "fail",
+      "title": "Exported packages build independently with Node alone and byte-match the studio's build; tokens propagate from tokens.json to every use; contrast is checked on the actual pairings at derivation and again at build; brief text can never become markup or script; output is deterministic; the AI-candidate verifier rejects hostile and credential-bearing candidates"
+    },
+    {
+      "detail": ".................ss............                                          [100%]",
+      "evidence_paths": [
+        "harness.junit.xml",
+        "harness.log"
+      ],
+      "id": "harness",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 4.17,
+      "status": "pass",
+      "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
+    },
+    {
+      "detail": "secret scan: 0 finding(s)",
+      "evidence_paths": [
+        "secret-scan.log"
+      ],
+      "id": "secret-scan",
+      "kind": "command",
+      "objective": true,
+      "seconds": 0.53,
+      "status": "pass",
+      "title": "No credentials in the repository or in the live site's shipped assets"
+    },
+    {
+      "detail": "live site and snapshot reachable; snapshot matches state",
+      "evidence_paths": [
+        "live-site.json"
+      ],
+      "id": "live-site",
+      "kind": "live",
+      "objective": true,
+      "seconds": 0.22,
+      "status": "pass",
+      "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
+    },
+    {
+      "detail": "checked 9 published files for minimal-motion-studio-20261022T083220Z-f3a3279c-a1; mismatches: none",
+      "evidence_paths": [
+        "published-matches-state.log"
+      ],
+      "id": "published-matches-state",
+      "kind": "command",
+      "objective": true,
+      "seconds": 1.25,
+      "status": "pass",
+      "title": "Published result files are byte-identical to the accepted computation"
+    },
+    {
+      "detail": "63 passed, 0 failed",
+      "evidence_paths": [
+        "e2e/summary.json"
+      ],
+      "id": "browser",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Live-site browser checks at 390, 768 and 1440 px (sandboxed preview, brief editing and field errors, palette adjustments and pairings, type, space and components, device widths, motion and reduced-motion preview, downloaded export built independently and matching the preview byte for byte and in computed styles, token propagation, injection, hostile import, keyboard, dark theme, studio reduced motion, history, states, no AI control for visitors, axe, overflow, console; plus the independent review's regression and held checks: long words at 390 px, history review fields, step focus, announcement field, focus order, 44 px targets, visible group labels, malformed deep links, still preset, run-list focus ring, sandboxing, hostile palettes, reduced motion, focus indicators, generated-page targets)"
+    },
+    {
+      "detail": "12 passed, 0 failed",
+      "evidence_paths": [
+        "lighthouse/summary.json"
+      ],
+      "id": "lighthouse",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Lighthouse CLI on the live site: accessibility at least 0.95, best practices and SEO at least 0.9, performance at least 0.9, LCP at most 2.5 s and CLS at most 0.1, for phone and desktop, each the median of three runs (Lighthouse default simulated throttling)"
+    }
+  ],
+  "project": "minimal-motion-studio",
+  "release_id": "minimal-motion-studio-20261022T083857Z-9a1ca58",
+  "repair_round": 1,
+  "rubric_sha256": "sha256:ed406e46dae65a6d81f3f8899137d9f4001ff2eb4604a16d2d8d601dca0d16dd",
+  "run_id": "minimal-motion-studio-20261022T083220Z-f3a3279c-a1",
+  "source_commit": "9a1ca587be7a808771f5780abb3c7a61f9e123f4",
+  "status": "blocked",
+  "subjective": {
+    "reason": "inference credentials are not configured for this repository",
+    "scores": [],
+    "status": "not_run"
+  },
+  "workflow_run_url": "https://github.com/mrrishit909/minimal-motion-studio/actions/runs/39748463108"
+}
