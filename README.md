@@ -40,8 +40,10 @@ The committed sample brief (a fictional garden design studio): 16 of 16 contrast
 violations at 390, 768 and 1440 px, and the exported package builds to a page byte-identical to the
 studio's preview. The dark launch example needed two colour adjustments (accent and button fill
 lightened), both listed in the studio and in `adjustments.json`. Lighthouse on the live site (default
-simulated throttling): accessibility 1.0, best practices 1.0, SEO 1.0; performance 0.96 on the phone
-profile and 1.0 on desktop; LCP 2.1 s (phone) and 0.48 s (desktop); CLS 0.
+simulated throttling, medians of three runs): accessibility 1.0, best practices 1.0, SEO 1.0;
+performance 0.96 on the phone profile and 1.0 on desktop; LCP 1.8 s (phone) and 0.48 s (desktop); CLS 0.
+An independent review confirmed 16 defects (5 major, 11 minor); all are fixed and kept as regression
+tests (see [verification](docs/VERIFICATION.md)).
 
 ## Use the exported package
 
