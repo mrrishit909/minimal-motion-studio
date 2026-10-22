@@ -1,8 +1,8 @@
 {
   "blocked_reason": null,
-  "created_at": "2026-10-22T07:24:04Z",
+  "created_at": "2026-10-22T07:44:38Z",
   "defect_batch_id": null,
-  "evidence_dir": "outcomes/minimal-motion-studio-20261022T072404Z-f15ee88/",
+  "evidence_dir": "outcomes/minimal-motion-studio-20261022T074438Z-f15ee88/",
   "findings": [
     {
       "detail": "sha256:b3e873a2fb5209e000cdce157fb237ecf3040c579e41e2e0e1bc16cce5e2c8ca",
@@ -35,7 +35,7 @@
       "id": "harness",
       "kind": "pytest",
       "objective": true,
-      "seconds": 2.75,
+      "seconds": 2.81,
       "status": "pass",
       "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
     },
@@ -47,7 +47,7 @@
       "id": "secret-scan",
       "kind": "command",
       "objective": true,
-      "seconds": 0.28,
+      "seconds": 0.52,
       "status": "pass",
       "title": "No credentials in the repository or in the live site's shipped assets"
     },
@@ -59,19 +59,19 @@
       "id": "live-site",
       "kind": "live",
       "objective": true,
-      "seconds": 0.07,
+      "seconds": 0.16,
       "status": "pass",
       "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
     },
     {
-      "detail": "checked 9 published files for minimal-motion-studio-20261022T064349Z-14a65095-a1; mismatches: none",
+      "detail": "checked 9 published files for minimal-motion-studio-20261022T072615Z-75d0ae8d-a1; mismatches: none",
       "evidence_paths": [
         "published-matches-state.log"
       ],
       "id": "published-matches-state",
       "kind": "command",
       "objective": true,
-      "seconds": 0.38,
+      "seconds": 1.18,
       "status": "pass",
       "title": "Published result files are byte-identical to the accepted computation"
     },
@@ -101,10 +101,10 @@
     }
   ],
   "project": "minimal-motion-studio",
-  "release_id": "minimal-motion-studio-20261022T072404Z-f15ee88",
+  "release_id": "minimal-motion-studio-20261022T074438Z-f15ee88",
   "repair_round": 0,
   "rubric_sha256": "sha256:b3e873a2fb5209e000cdce157fb237ecf3040c579e41e2e0e1bc16cce5e2c8ca",
-  "run_id": "minimal-motion-studio-20261022T064349Z-14a65095-a1",
+  "run_id": "minimal-motion-studio-20261022T072615Z-75d0ae8d-a1",
   "source_commit": "f15ee88f9ca3311dd476b98a950626bab0984446",
   "status": "released",
   "subjective": {
@@ -112,5 +112,5 @@
     "scores": [],
     "status": "not_run"
   },
-  "workflow_run_url": "https://github.com/mrrishit909/minimal-motion-studio/actions/runs/39739799248"
+  "workflow_run_url": "https://github.com/mrrishit909/minimal-motion-studio/actions/runs/39740454098"
 }
