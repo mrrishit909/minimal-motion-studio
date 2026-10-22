@@ -63,6 +63,17 @@ breaks a contrast pairing. `dist/` can be served by any static host.
 [portfolio integration](docs/PORTFOLIO_INTEGRATION.md), [design contract](docs/DESIGN_CONTRACT.md),
 [portfolio manifest](portfolio-manifest.json).
 
+## Assets and licences
+
+| Font | Package | Licence |
+|---|---|---|
+| Recursive (Latin, MONO-axis file) | `@fontsource-variable/recursive` 5.3.0 | SIL Open Font License 1.1, (c) The Recursive Project Authors |
+
+The fonts are installed from npm (Fontsource packages, which carry the OFL text) and bundled into the
+site's build; nothing loads from a third-party font service. Icons and illustrations are original inline
+SVG and CSS; there are no photographs or third-party images. Example brands are fictional; generated pages use system font stacks (Modern Font Stacks, CC0) and carry no third-party asset. The code is published
+in this public repository.
+
 ## Limitations
 
 Three templates, seven system font voices, four motion presets, at most six items and five questions.

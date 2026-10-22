@@ -115,6 +115,7 @@ test("studio: stage shows the composed page in a sandboxed frame; accessible, no
   await noOverflow(page);
   await axe(page);
   await shot(page, "studio");
+  await shot(page, "studio-first-viewport"); // kept as durable release evidence (the outcome loop keeps *-first-viewport.jpg)
   await shot(page, "studio-full", true);
   expect(problems).toEqual([]);
 });
