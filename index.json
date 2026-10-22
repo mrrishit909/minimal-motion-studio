@@ -2,14 +2,14 @@
   "runs": [
     {
       "attempt": 1,
-      "completed_at": null,
+      "completed_at": "2026-10-22T07:46:51Z",
       "created_at": "2026-10-22T07:45:50Z",
-      "headline": null,
+      "headline": "Launch template for Rotaleaf: 16 of 16 contrast pairings pass (2 colours adjusted), 0 axe violations at 3 widths, export builds identically.",
       "issue": null,
       "request_id": "f429b9c113d7a774",
       "run_id": "minimal-motion-studio-20261022T074550Z-f429b9c1-a1",
       "source": "manual",
-      "status": "running"
+      "status": "completed"
     },
     {
       "attempt": 1,

@@ -1,0 +1,60 @@
+{
+  "counts": {
+    "adjustments": 2,
+    "axe_violations": 0,
+    "console_errors": 0,
+    "failed_requests": 0,
+    "overflow_widths": 0,
+    "pairings": 16,
+    "pairings_pass": 16,
+    "widths": 3
+  },
+  "export_identical": true,
+  "files": [
+    {
+      "bytes": 437,
+      "name": "adjustments.json",
+      "sha256": "sha256:630f0fa13e38aa6c180525acbe34895748612934c60bb5400d26ee306cf18eaf"
+    },
+    {
+      "bytes": 223,
+      "name": "manifest.json",
+      "sha256": "sha256:f88ea532ca144710c20d68194a30480b28916a4c3897eb586c0edeae10a8151d"
+    },
+    {
+      "bytes": 50485,
+      "name": "package.zip",
+      "sha256": "sha256:69bd707ca634ce1bf0d38cae0d4f515ccdf3882509bae2317aaa7ef39388f565"
+    },
+    {
+      "bytes": 2654,
+      "name": "report.md",
+      "sha256": "sha256:fe056dde3cceb7499384ebd8a85d5fbd6e2a46198146928a32b9adfa796a6330"
+    },
+    {
+      "bytes": 1160,
+      "name": "review.json",
+      "sha256": "sha256:738162ffbbd0fa7709cf348a167a174bbe06066fff83db31e77ab17a86fdd6a8"
+    },
+    {
+      "bytes": 25689,
+      "name": "site.html",
+      "sha256": "sha256:709987673765b0563d0b290c60f8aa786795a75500f3162cce2be6fdf282e0bb"
+    },
+    {
+      "bytes": 2735,
+      "name": "spec.json",
+      "sha256": "sha256:5b5018d281d95717f3a87ad431c1e3c44acf874537161bfabdbea4b33fbbd840"
+    },
+    {
+      "bytes": 5587,
+      "name": "tokens.json",
+      "sha256": "sha256:8cbf178cd4930d7098651d86f8331b5f06b2580a1376ea59db6806dba33e8eb8"
+    }
+  ],
+  "headline": "Launch template for Rotaleaf: 16 of 16 contrast pairings pass (2 colours adjusted), 0 axe violations at 3 widths, export builds identically.",
+  "motion_preset": "lively",
+  "origin": "studio",
+  "schema_version": "1.0",
+  "template": "launch"
+}

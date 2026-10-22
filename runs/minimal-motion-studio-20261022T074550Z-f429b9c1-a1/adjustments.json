@@ -1,0 +1,14 @@
+[
+  {
+    "from": "#a6422a",
+    "reason": "Lightened to raise contrast from 2.22:1 to 4.50:1 against the page and panels, so links and accent text are readable.",
+    "role": "accent",
+    "to": "#e0775d"
+  },
+  {
+    "from": "#a6422a",
+    "reason": "Lightened to raise contrast from 2.22:1 to 3.01:1 against the page and panels, so button edges are visible (3:1 for interface parts).",
+    "role": "action",
+    "to": "#be583f"
+  }
+]

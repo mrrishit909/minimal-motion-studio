@@ -1,0 +1,91 @@
+{
+  "brand": {
+    "contact": "support@rotaleaf.example",
+    "cta_href": "https://rotaleaf.example/beta",
+    "cta_label": "Join the beta",
+    "hours": "",
+    "location": "",
+    "name": "Rotaleaf",
+    "note": "Now in public beta for kitchens of up to 30 staff",
+    "summary": "Rotaleaf lays out a week of shifts on one screen, totals everyone's hours as you go, and sends each person their shifts by text when you publish.",
+    "tagline": "Shift rotas for small kitchens, planned in minutes"
+  },
+  "components": {
+    "button": "solid",
+    "header": "inline",
+    "radius": "soft",
+    "surface": "flat"
+  },
+  "faqs": [
+    {
+      "a": "Nothing. Before the beta ends we will publish pricing at least 30 days ahead of any charge, and you can export your rotas at any time.",
+      "q": "What does it cost during the beta?"
+    },
+    {
+      "a": "No. Rotaleaf plans shifts and totals hours. It exports a CSV that you can import into your payroll provider.",
+      "q": "Does it replace our payroll system?"
+    },
+    {
+      "a": "No. Shifts and swap confirmations arrive by text message, which works on any phone.",
+      "q": "Do my staff need smartphones?"
+    }
+  ],
+  "items": [
+    {
+      "meta": "Planner",
+      "text": "Drag shifts onto a week view and copy last week's pattern in one step.",
+      "title": "One-screen week"
+    },
+    {
+      "meta": "Phones",
+      "text": "Staff ask to swap from their phone. You approve or decline, and the rota updates for everyone.",
+      "title": "Swap requests"
+    },
+    {
+      "meta": "Totals",
+      "text": "Planned hours sit beside contracted hours for each person, so overtime shows before you publish.",
+      "title": "Hours as you plan"
+    },
+    {
+      "meta": "Sharing",
+      "text": "Published shifts go out by text message. Nobody needs to install anything to see their week.",
+      "title": "Text, not another app"
+    },
+    {
+      "meta": "Export",
+      "text": "Download approved hours as a CSV with one row per person per shift.",
+      "title": "Payroll export"
+    },
+    {
+      "meta": "Offline",
+      "text": "Plan on a tablet in the back office with no signal. Changes sync when you reconnect.",
+      "title": "Works offline"
+    }
+  ],
+  "motion": {
+    "preset": "lively",
+    "speed_pct": 100,
+    "stagger_ms": 80
+  },
+  "palette": {
+    "accent": "#A6422A",
+    "canvas": "#29201B",
+    "ink": "#FFF6E8",
+    "mode": "dark",
+    "support": "#5A171B"
+  },
+  "schema_version": "1.0",
+  "space": {
+    "base_px": 8,
+    "density": "comfortable"
+  },
+  "template": "launch",
+  "type": {
+    "base_px": 17,
+    "body": "humanist",
+    "heading": "geometric",
+    "heading_weight": 700,
+    "measure_ch": 62,
+    "ratio": "1.414"
+  }
+}

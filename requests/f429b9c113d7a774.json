@@ -3,10 +3,10 @@
     {
       "attempt": 1,
       "run_id": "minimal-motion-studio-20261022T074550Z-f429b9c1-a1",
-      "status": "running"
+      "status": "completed"
     }
   ],
-  "latest_status": "running",
+  "latest_status": "completed",
   "params_hash": "sha256:7ce5b8996f0433a77e66961e42ec641f4bad1d05af315e375a6a81f8aebcc956",
   "request_id": "f429b9c113d7a774"
 }

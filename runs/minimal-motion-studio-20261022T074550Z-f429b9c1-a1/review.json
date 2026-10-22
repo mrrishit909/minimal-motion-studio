@@ -1,0 +1,54 @@
+{
+  "browser": "chromium 153.0.8010.12",
+  "flags": {
+    "axe_clean": true,
+    "details_keyboard": true,
+    "focus_visible": true,
+    "motion": true,
+    "no_console_errors": true,
+    "no_overflow": true,
+    "no_requests": true,
+    "reduced_motion": true
+  },
+  "motion": {
+    "animations_started": 13,
+    "preset": "lively",
+    "reduced_animations": 0
+  },
+  "schema_version": "1.0",
+  "widths": [
+    {
+      "axe_violations": [],
+      "console_errors": [],
+      "details_keyboard_ok": 3,
+      "details_total": 3,
+      "failed_requests": 0,
+      "focus_visible": true,
+      "height": 844,
+      "overflow_px": 0,
+      "width": 390
+    },
+    {
+      "axe_violations": [],
+      "console_errors": [],
+      "details_keyboard_ok": 3,
+      "details_total": 3,
+      "failed_requests": 0,
+      "focus_visible": true,
+      "height": 1024,
+      "overflow_px": 0,
+      "width": 768
+    },
+    {
+      "axe_violations": [],
+      "console_errors": [],
+      "details_keyboard_ok": 3,
+      "details_total": 3,
+      "failed_requests": 0,
+      "focus_visible": true,
+      "height": 900,
+      "overflow_px": 0,
+      "width": 1440
+    }
+  ]
+}
