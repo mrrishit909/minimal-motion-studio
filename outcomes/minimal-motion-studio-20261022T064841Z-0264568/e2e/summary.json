@@ -1,0 +1,297 @@
+{
+  "target": "https://mrrishit909.github.io/minimal-motion-studio/",
+  "status": "passed",
+  "passed": 48,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3238
+    },
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3425
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1382
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1409
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3051
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3109
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3559
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3450
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1527
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1683
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1591
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1549
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1318
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1559
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 886
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 875
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1570
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1472
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 851
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 888
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1214
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1161
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3486
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 536
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 4024
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 690
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 2178
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2161
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 2239
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2320
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1833
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1662
+    },
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2579
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1199
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2318
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2510
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1009
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1019
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 849
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 500
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1052
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 582
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 974
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2923
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 414
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1582
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1396
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1293
+    }
+  ]
+}

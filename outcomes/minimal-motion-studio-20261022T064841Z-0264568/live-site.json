@@ -1,0 +1,15 @@
+[
+  {
+    "ok": true,
+    "status": 200,
+    "url": "https://mrrishit909.github.io/minimal-motion-studio/"
+  },
+  {
+    "latest_run_id": "minimal-motion-studio-20261022T064349Z-14a65095-a1",
+    "matches_state": true,
+    "ok": true,
+    "state_latest_run_id": "minimal-motion-studio-20261022T064349Z-14a65095-a1",
+    "status": 200,
+    "url": "https://mrrishit909.github.io/minimal-motion-studio/data/snapshot.json"
+  }
+]
