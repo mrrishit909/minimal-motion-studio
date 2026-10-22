@@ -5,7 +5,7 @@
   "max_repair_rounds": 3,
   "hard_gates": [
     {"id": "export-gates", "title": "Exported packages build independently with Node alone and byte-match the studio's build; tokens propagate from tokens.json to every use; contrast is checked on the actual pairings at derivation and again at build; brief text can never become markup or script; output is deterministic; the AI-candidate verifier rejects hostile and credential-bearing candidates",
-     "kind": "evidence-file", "file": "export-gates/summary.json", "min_passed": 64},
+     "kind": "evidence-file", "file": "export-gates/summary.json", "min_passed": 91},
     {"id": "harness", "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards",
      "kind": "pytest", "args": "tests/harness", "timeout": 600},
     {"id": "secret-scan", "title": "No credentials in the repository or in the live site's shipped assets",
@@ -14,8 +14,8 @@
      "kind": "live", "marker": "data-app=\"minimal-motion-studio\""},
     {"id": "published-matches-state", "title": "Published result files are byte-identical to the accepted computation",
      "kind": "command", "argv": ["python", "-m", "harness", "verify-published", "--state-dir", "state"], "timeout": 300},
-    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (sandboxed preview, brief editing and field errors, palette adjustments and pairings, type, space and components, device widths, motion and reduced-motion preview, downloaded export built independently and matching the preview byte for byte and in computed styles, token propagation, injection, hostile import, keyboard, dark theme, studio reduced motion, history, states, no AI control for visitors, axe, overflow, console)",
-     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 48},
+    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (sandboxed preview, brief editing and field errors, palette adjustments and pairings, type, space and components, device widths, motion and reduced-motion preview, downloaded export built independently and matching the preview byte for byte and in computed styles, token propagation, injection, hostile import, keyboard, dark theme, studio reduced motion, history, states, no AI control for visitors, axe, overflow, console; plus the independent review's regression and held checks: long words at 390 px, history review fields, step focus, announcement field, focus order, 44 px targets, visible group labels, malformed deep links, still preset, run-list focus ring, sandboxing, hostile palettes, reduced motion, focus indicators, generated-page targets)",
+     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 63},
     {"id": "lighthouse", "title": "Lighthouse CLI on the live site: accessibility at least 0.95, best practices and SEO at least 0.9, performance at least 0.9, LCP at most 2.5 s and CLS at most 0.1, for phone and desktop, each the median of three runs (Lighthouse default simulated throttling)",
      "kind": "evidence-file", "file": "lighthouse/summary.json", "min_passed": 12}
   ],

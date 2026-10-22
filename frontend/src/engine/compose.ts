@@ -3,7 +3,7 @@ import { MOTION_PRESETS } from "./presets.ts";
 import { RAW } from "./raw.ts";
 import { CTA_HREF_PATTERN, validateSpec } from "./schema.ts";
 import { deriveTokens } from "./tokens.ts";
-import type { Composition, Spec, Template, Tokens } from "./types.ts";
+import type { Composition, Origin, Spec, Template, Tokens } from "./types.ts";
 
 export const GENERATOR = { name: "Minimal Motion Studio", version: "1.0.0" } as const;
 
@@ -40,11 +40,8 @@ export function stableJson(value: unknown): string {
 }
 
 /** Package name from the brand: ascii letters and digits joined by hyphens. */
-export function slug(name: string): string {
-  const s = name.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40).replace(/-+$/g, "");
-  return s || "brand";
-}
+import { slug } from "./slug.ts";
+export { slug };
 
 // ---------------------------------------------------------------------------------------------
 // Decorative motif: deterministic from a hash of the brand name, no trigonometry at run time
@@ -119,7 +116,8 @@ function motif(spec: Spec): string {
     for (const [rx, ry] of [[226, 92], [172, 70], [118, 48]] as const) {
       shapes.push(`<ellipse class="m-lb" stroke-width="1.5" cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}"/>`);
     }
-    shapes.push(`<circle class="m-s" cx="${cx}" cy="${cy}" r="${int(28, 36)}"/>`);
+    // The planet keeps an accent ring: the support colour alone can sit close to the canvas (dark pages).
+    shapes.push(`<circle class="m-s m-edge" stroke-width="2.5" cx="${cx}" cy="${cy}" r="${int(28, 36)}"/>`);
     const a = int(14, 22);
     const b = (a + int(2, 4)) % 24;
     const pt = (i: number, rx: number, ry: number) => `${n1(cx + rx * (C[i] as number))} ${n1(cy + ry * (S[i] as number))}`;
@@ -251,7 +249,18 @@ ${SCRIPT_TAG}
 
 const md = (s: string) => esc(s).replace(/([\\`*_[\]#|])/g, "\\$1");
 
-function readme(spec: Spec, tokens: Tokens): string {
+/** Where the brief came from; it decides what the package README says about provenance. */
+export type Provenance = { origin: Origin; candidate_sha256?: string };
+
+function provenanceText(p: Provenance): string {
+  if (p.origin === "ai-candidate") {
+    return `The brief in brief.json was proposed by an AI model in the owner-only workflow and verified without secrets (schema, credential check and an independent build) before use. Candidate file: ${p.candidate_sha256}. Every file in this package was then generated deterministically by Minimal Motion Studio 1.0.0 from that brief; no model wrote any of the code, markup or styles.`;
+  }
+  const source = p.origin === "fixture" ? "a committed test brief, brief.json" : "brief.json";
+  return `Generated deterministically by Minimal Motion Studio 1.0.0 from ${source}. No AI was involved in producing these files.`;
+}
+
+function readme(spec: Spec, tokens: Tokens, provenance: Provenance): string {
   const m = tokens.motion;
   const preset = MOTION_PRESETS[m.preset];
   const rows = tokens.pairings.map((p) => `| ${p.label} | ${p.fg} on ${p.bg} | ${p.ratio.toFixed(2)}:1 | ${p.min}:1 | ${p.pass ? "pass" : "FAIL"} |`);
@@ -305,7 +314,7 @@ ${motion} Visitors who ask their system for reduced motion see no animation.
 
 ## Provenance
 
-Generated deterministically by Minimal Motion Studio 1.0.0 from brief.json. No AI was involved in producing these files.
+${provenanceText(provenance)}
 
 You may use, change and publish these files however you like, without attribution.
 `;
@@ -340,14 +349,22 @@ try {
 `;
 }
 
-/** The exported source package for a brief. Throws on an invalid brief. */
-export function compose(input: unknown): Composition {
+/**
+ * The exported source package for a brief. Throws on an invalid brief. The studio calls compose(spec);
+ * the CLI passes the request's provenance so an AI-proposed brief is never described as AI-free.
+ */
+export function compose(input: unknown, provenance: Provenance = { origin: "studio" }): Composition {
   const v = validateSpec(input);
   if (!v.ok) throw new Error(`The brief is not valid:\n- ${v.errors.join("\n- ")}`);
+  const ai = provenance.origin === "ai-candidate";
+  if (!["studio", "ai-candidate", "fixture"].includes(provenance.origin)) throw new Error("unknown origin");
+  if (ai !== /^sha256:[0-9a-f]{64}$/.test(provenance.candidate_sha256 ?? "") || (!ai && provenance.candidate_sha256 !== undefined)) {
+    throw new Error("candidate_sha256 (sha256:<64 hex>) is required for, and only allowed with, origin ai-candidate");
+  }
   const spec = v.spec;
   const { tokens, adjustments } = deriveTokens(spec);
   const files: Record<string, string> = {
-    "README.md": readme(spec, tokens),
+    "README.md": readme(spec, tokens, provenance),
     "brief.json": stableJson(spec),
     "build.mjs": buildScript(),
     "index.html": page(spec),

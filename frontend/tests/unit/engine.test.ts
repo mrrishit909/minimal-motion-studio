@@ -9,7 +9,7 @@ import { crc32 as zlibCrc32 } from "node:zlib";
 import { wcagContrast } from "culori";
 import { afterAll, describe, expect, it } from "vitest";
 import { build, contrastRatio, PAIRINGS } from "../../src/engine/build-core.js";
-import { canonicalJson, headline, type Review, secretFindings } from "../../src/engine/cli.ts";
+import { canonicalJson, headline, type Review, SECRET_RULES, secretFindings } from "../../src/engine/cli.ts";
 import { compose, esc, safeHref, sha256Base64, slug } from "../../src/engine/compose.ts";
 import { DEFAULT_SPEC, EXAMPLES } from "../../src/engine/examples.ts";
 import { curvePoints, MOTION_PRESETS, scaleDuration } from "../../src/engine/presets.ts";
@@ -238,6 +238,24 @@ describe("escaping", () => {
     expect(attributeNames(html).filter((a) => a.startsWith("on"))).toEqual([]);
   });
 
+  it("records where the brief came from in the package README", () => {
+    const sha256 = `sha256:${"ab".repeat(32)}`;
+    const studio = compose(DEFAULT_SPEC).files["README.md"] as string;
+    const fixture = compose(DEFAULT_SPEC, { origin: "fixture" }).files["README.md"] as string;
+    const ai = compose(DEFAULT_SPEC, { origin: "ai-candidate", candidate_sha256: sha256 }).files["README.md"] as string;
+    expect(studio).toContain("No AI was involved in producing these files.");
+    expect(fixture).toContain("a committed test brief");
+    expect(ai).not.toContain("No AI was involved");
+    expect(ai).toContain("proposed by an AI model in the owner-only workflow");
+    expect(ai).toContain(sha256);
+    expect(() => compose(DEFAULT_SPEC, { origin: "ai-candidate" })).toThrow(/candidate_sha256/);
+    expect(() => compose(DEFAULT_SPEC, { origin: "studio", candidate_sha256: sha256 })).toThrow(/candidate_sha256/);
+    // Provenance changes the README only: every other file, and so the built page, is the same.
+    const a = compose(DEFAULT_SPEC).files;
+    const b = compose(DEFAULT_SPEC, { origin: "ai-candidate", candidate_sha256: sha256 }).files;
+    for (const name of Object.keys(a)) if (name !== "README.md") expect(b[name], name).toBe(a[name]);
+  });
+
   it("omits empty sections and lines", async () => {
     const s = clone(EXAMPLES.studio);
     s.brand = { ...s.brand, summary: "", note: "", contact: "", location: "", hours: "" };
@@ -411,6 +429,16 @@ describe("type, space and motion tokens", () => {
     expect(serif.type[1]!.line_height).toBeGreaterThan(t.type[1]!.line_height);
   });
 
+  it("makes hover lift and press feedback follow the preset (none for still)", async () => {
+    const still = await page({ ...clone(DEFAULT_SPEC), motion: { preset: "still", speed_pct: 100, stagger_ms: 0 } });
+    expect(still).toContain("--m-lift: none;");
+    expect(still).toContain("--m-press: none;");
+    const gentle = await page(DEFAULT_SPEC);
+    expect(gentle).toContain("--m-press: translateY(1px) scale(0.97);");
+    expect(RAW.siteCss).toMatch(/\.btn:active \{ transform: var\(--m-press\);/);
+    expect(RAW.siteCss).not.toMatch(/\.btn[^{]*\{[^}]*(translate[XY]?|scale)\(/); // no literal button movement
+  });
+
   it("scales durations by speed and stills everything for the still preset", () => {
     expect(scaleDuration(520, 200)).toBe(260);
     expect(scaleDuration(520, 50)).toBe(1040);
@@ -493,8 +521,30 @@ describe("verify-candidate", () => {
     const spec = clone(DEFAULT_SPEC);
     spec.items[1]!.text = `key ${"AKIA"}${"Q".repeat(16)}`;
     spec.brand.note = ["eyJhbGciOiJIUzI1NiJ9", "eyJzdWIiOiIxMjM0NTY3ODkwIn0", "sig"].join(".");
-    expect(secretFindings(spec)).toEqual(["brand.note: looks like a credential (JSON web token)", "items[1].text: looks like a credential (AWS access key)"]);
+    expect(secretFindings(spec)).toEqual(["brand.note: looks like a credential (JSON web token)", "items[1].text: looks like a credential (aws-access-key)"]);
     expect(secretFindings(DEFAULT_SPEC)).toEqual([]);
+  });
+
+  it("repeats every pattern of scripts/secret_scan.py (a superset of the repository scan)", () => {
+    const py = readFileSync(join(REPO, "scripts/secret_scan.py"), "utf8");
+    const scan = [...py.matchAll(/"([\w-]+)":\s*re\.compile\(r"((?:[^"\\]|\\.)*)"\)/g)].map(([, name, src]) => {
+      const flags = src!.startsWith("(?i)") ? "i" : "";
+      return { name, source: src!.replace(/^\(\?i\)/, "").replace(/\\"/g, '"'), flags };
+    });
+    expect(scan.length).toBeGreaterThanOrEqual(7);
+    for (const p of scan) {
+      expect(SECRET_RULES.some(([, re]) => re.source === p.source && re.flags === p.flags), `${p.name}: ${p.source}`).toBe(true);
+    }
+  });
+
+  it("refuses a candidate that is not valid UTF-8 instead of hashing replaced bytes", () => {
+    const dir = tempDir();
+    const bytes = Buffer.from(JSON.stringify(DEFAULT_SPEC), "utf8");
+    bytes[bytes.indexOf(Buffer.from("Fieldnote"))] = 0xff;
+    writeFileSync(join(dir, "c.json"), bytes);
+    const r = cli("verify-candidate", "--candidate", join(dir, "c.json"), "--out", join(dir, "o.json"));
+    expect(r.status).toBe(1);
+    expect(r.stderr).toMatch(/not valid UTF-8/);
   });
 
   it("rejects oversized and non-JSON files", () => {

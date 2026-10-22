@@ -7,10 +7,9 @@ import { loadEngine, type Studio } from "./useStudio";
 
 const MAX_IMPORT_BYTES = 64 * 1024;
 
-export function slug(name: string): string {
-  const s = name.normalize("NFKD").replace(/[^\x20-\x7e]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
-  return s || "brand";
-}
+import { slug } from "../engine/slug.ts";
+
+export { slug };
 
 function kb(bytes: number): string {
   return bytes < 1024 ? `${bytes} B` : `${(bytes / 1024).toFixed(1)} KB`;

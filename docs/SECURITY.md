@@ -49,7 +49,8 @@
 - No `pull_request_target`. Pull requests run CI with read-only permissions and no secrets.
 - Third-party actions are pinned to full commit SHAs (tag noted in a comment).
 - Dependencies install from lockfiles (`uv.lock` with `uv sync --frozen`, `package-lock.json`
-  with `npm ci`). The exported package has no dependencies at all.
+  with `npm ci`). The one exception is the optional Claude Code CLI, installed globally by exact version
+  (`@anthropic-ai/claude-code@2.1.292`) in a step without secrets, only when an inference secret exists. The exported package has no dependencies at all.
 - Every job has `timeout-minutes`; state writers serialize through `state-writer`.
 
 ## Credentials
@@ -57,8 +58,10 @@
 - No credential is stored in this repository or shipped to the browser. CI and the Outcome
   Verification Loop run `scripts/secret_scan.py` over tracked files and the live site's HTML,
   JS and CSS.
-- Secret-bearing jobs: the optional grader in `outcome.yml` (Read and Glob over screenshots and the
-  rubric) and the proposal job in `generate.yml` (no tools). Both are skipped without the secret.
+- Secret-bearing jobs: the optional grader in `outcome.yml` (only Read and Glob, Read allowed only under
+  `evidence/`, `rubric/` and the design contract) and the proposal job in `generate.yml` (no tools). In
+  both, the pinned CLI is installed in an earlier step with no secret in its environment, so install
+  scripts never see a key. Both are skipped without the secret.
 - Visitors are never asked for tokens. The site has no write path; durable requests go through
   GitHub Issues, which require a GitHub sign-in, and only the owner's requests run unattended.
 

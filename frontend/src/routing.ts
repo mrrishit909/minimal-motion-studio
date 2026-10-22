@@ -21,7 +21,14 @@ export type Route =
 const IDS = new Set<string>(STEPS.map((s) => s.id));
 
 export function parseRoute(hash: string): Route {
-  const [head, a] = hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(decodeURIComponent);
+  const safe = (part: string) => {
+    try {
+      return decodeURIComponent(part);
+    } catch {
+      return part; // a malformed escape stays as typed; it simply matches no run
+    }
+  };
+  const [head, a] = hash.replace(/^#\/?/, "").split("/").filter(Boolean).map(safe);
   if (head === "studio" && a && IDS.has(a)) return { view: "studio", step: a as StepId };
   if (head === "history") return a ? { view: "history", runId: a } : { view: "history" };
   if (head === "request") return { view: "request" };

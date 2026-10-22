@@ -93,9 +93,13 @@ export type ReviewWidth = {
   width: number;
   height?: number;
   axe_violations: { id: string; impact: string | null; nodes: number }[];
+  overflow_px?: number;
+  details_keyboard_ok?: number;
+  details_total?: number;
+  focus_visible?: boolean;
   [key: string]: unknown;
 };
-export type Review = { widths: ReviewWidth[]; [key: string]: unknown };
+export type Review = { widths: ReviewWidth[]; flags?: Record<string, unknown>; [key: string]: unknown };
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 async function loadRun(dataUrl: string, runId: string, signal: AbortSignal): Promise<RunDetail> {

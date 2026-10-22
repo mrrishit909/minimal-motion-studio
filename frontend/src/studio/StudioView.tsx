@@ -36,7 +36,11 @@ export function StudioView({ studio, step, config, device, setDevice }: {
     if (!before || before === step) return;
     const dir = STEPS.findIndex((s) => s.id === step) > STEPS.findIndex((s) => s.id === before) ? 1 : -1;
     animate(panel.current, [{ opacity: 0, transform: `translateY(${dir * 8}px)` }, { opacity: 1, transform: "none" }], { duration: 200 });
-    heading.current?.focus({ preventScroll: true });
+    const h = heading.current;
+    if (!h) return;
+    const r = h.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > window.innerHeight) h.scrollIntoView({ block: "start" });
+    h.focus({ preventScroll: true });
   }, [step]);
 
   const current = STEPS.find((s) => s.id === step)!;
@@ -52,6 +56,9 @@ export function StudioView({ studio, step, config, device, setDevice }: {
 
   return (
     <div className="mm-studio">
+      <div className="mm-stage-column">
+        <Stage studio={studio} device={device} setDevice={setDevice} reduced={reduced} setReduced={setReduced} />
+      </div>
       <div className="mm-controls">
         <nav className="mm-steps" aria-label="Steps">
           <ol>
@@ -72,9 +79,6 @@ export function StudioView({ studio, step, config, device, setDevice }: {
           {next && <a className="mm-next" href={routeHref({ view: "studio", step: next.id })}>Next: {next.label}</a>}
         </div>
         <ExportPanel studio={studio} config={config} />
-      </div>
-      <div className="mm-stage-column">
-        <Stage studio={studio} device={device} setDevice={setDevice} reduced={reduced} setReduced={setReduced} />
       </div>
     </div>
   );

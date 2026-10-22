@@ -11,7 +11,7 @@ import { dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseArgs, promisify } from "node:util";
 import { build } from "./build-core.js";
-import { compose, esc, stableJson } from "./compose.ts";
+import { compose, esc, type Provenance, stableJson } from "./compose.ts";
 import { validateRequest, validateSpec } from "./schema.ts";
 import type { Adjustment, Composition, Preset, Request, Spec, Tokens } from "./types.ts";
 import { zip } from "./zip.ts";
@@ -27,7 +27,10 @@ const sha256Hex = (data: string | Uint8Array) => createHash("sha256").update(dat
 
 /**
  * Canonical JSON for hashing: keys sorted, no spaces, everything outside printable ASCII escaped as
- * lower-case \uXXXX. Byte-identical to Python's json.dumps(x, sort_keys=True, separators=(",", ":")).
+ * lower-case \uXXXX. Byte-identical to Python's json.dumps(x, sort_keys=True, separators=(",", ":"))
+ * for every valid request whose numbers are written as plain integers. A number written with a
+ * fraction or exponent (17.0, 1e2) still validates in both, but JavaScript prints it as 17 or 100
+ * while Python keeps 17.0 or 100.0, so the two hashes differ for such a file.
  */
 export function canonicalJson(value: unknown): string {
   const sort = (v: unknown): unknown => {
@@ -49,12 +52,24 @@ function readJson(path: string, limit: number): { raw: Buffer; value: unknown } 
   if (size > limit) throw new Failure(`file is larger than the ${limit} byte limit`);
   const raw = readFileSync(path);
   if (raw.length > limit) throw new Failure(`file is larger than the ${limit} byte limit`);
+  let text: string;
   try {
-    return { raw, value: JSON.parse(raw.toString("utf8")) };
+    // Fatal decoding: invalid UTF-8 is refused, never silently replaced, so the bytes that are hashed
+    // are exactly the bytes that were checked.
+    text = new TextDecoder("utf-8", { fatal: true }).decode(raw);
+  } catch {
+    throw new Failure("file is not valid UTF-8");
+  }
+  try {
+    return { raw, value: JSON.parse(text) };
   } catch {
     throw new Failure("file is not valid JSON");
   }
 }
+
+/** The provenance compose() records in the package README, from a validated request. */
+const provenanceOf = (req: Request): Provenance =>
+  req.origin === "ai-candidate" ? { origin: req.origin, candidate_sha256: req.candidate_sha256 } : { origin: req.origin };
 
 const run = promisify(execFile);
 
@@ -79,8 +94,8 @@ async function independentBuild(files: Record<string, string>): Promise<{ dir: s
 }
 
 /** Compose, build in memory and build independently; the two pages must be byte-identical. */
-async function composeAndCheck(spec: Spec): Promise<{ comp: Composition; html: string; dir: string }> {
-  const comp = compose(spec);
+async function composeAndCheck(spec: Spec, provenance: Provenance): Promise<{ comp: Composition; html: string; dir: string }> {
+  const comp = compose(spec, provenance);
   let preview: string;
   try {
     preview = (await build(comp.files, sha256Base64))["dist/index.html"] as string;
@@ -261,7 +276,7 @@ async function cmdRun(requestPath: string, out: string, screens: string): Promis
   const v = validateRequest(value);
   if (!v.ok) throw new Failure(`the request is not valid:\n- ${v.errors.join("\n- ")}`);
   const req = v.request;
-  const { comp, html, dir } = await composeAndCheck(req.spec);
+  const { comp, html, dir } = await composeAndCheck(req.spec, provenanceOf(req));
   let rev: Review;
   try {
     mkdirSync(screens, { recursive: true });
@@ -305,20 +320,30 @@ async function cmdRun(requestPath: string, out: string, screens: string): Promis
   console.log(line);
 }
 
-// Credential shapes an AI step must never smuggle into a brief (checked after the schema).
-const SECRET_RULES: [string, RegExp][] = [
-  ["Anthropic key", /sk-ant-/],
-  ["GitHub token", /gh[pos]_|github_pat_/],
-  ["AWS access key", /AKIA[0-9A-Z]{16}/],
+// Credential shapes an AI step must never smuggle into a brief (checked after the schema). The first
+// seven repeat scripts/secret_scan.py's PATTERNS exactly (a test keeps the two in sync); the rest are
+// broader prefixes and a JSON web token shape, so this list is a superset of the repository scan.
+export const SECRET_RULES: [string, RegExp][] = [
+  ["anthropic-key", /sk-ant-[A-Za-z0-9_-]{20,}/],
+  ["openai-key", /sk-(proj-)?[A-Za-z0-9]{32,}/],
+  ["github-token", /\b(gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})\b/],
+  ["aws-access-key", /\b(AKIA|ASIA)[0-9A-Z]{16}\b/],
+  ["private-key", /-----BEGIN (RSA |EC |OPENSSH |)PRIVATE KEY-----/],
+  ["slack-token", /\bxox[abposr]-[A-Za-z0-9-]{10,}/],
+  ["generic-assignment", /\b(api[_-]?key|secret|password)\s*[:=]\s*['"][A-Za-z0-9/+_=-]{16,}['"]/i],
+  ["Anthropic key prefix", /sk-ant-/],
+  ["GitHub token prefix", /gh[pousr]_|github_pat_/],
+  ["AWS key id", /(AKIA|ASIA)[0-9A-Z]{16}/],
   ["private key block", /-----BEGIN/],
-  ["Slack token", /xox[baprs]-/],
+  ["Slack token prefix", /xox[abposr]-/],
   ["JSON web token", /eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}/],
 ];
 
 /** Paths of strings that look like credentials, with the rule matched; never the value. */
 export function secretFindings(value: unknown, path = ""): string[] {
   if (typeof value === "string") {
-    return SECRET_RULES.filter(([, re]) => re.test(value)).map(([name]) => `${path || "the brief"}: looks like a credential (${name})`);
+    const rule = SECRET_RULES.find(([, re]) => re.test(value));
+    return rule ? [`${path || "the brief"}: looks like a credential (${rule[0]})`] : [];
   }
   if (Array.isArray(value)) return value.flatMap((v, i) => secretFindings(v, `${path}[${i}]`));
   if (value && typeof value === "object") {
@@ -333,9 +358,9 @@ async function cmdVerify(candidatePath: string, out: string): Promise<void> {
   if (!v.ok) throw new Failure(`the candidate breaks the brief schema:\n- ${v.errors.join("\n- ")}`);
   const secrets = secretFindings(v.spec);
   if (secrets.length) throw new Failure(`the candidate was rejected:\n- ${secrets.join("\n- ")}`);
-  const { dir } = await composeAndCheck(v.spec);
-  rmSync(dir, { recursive: true, force: true });
   const request: Request = { spec: v.spec, origin: "ai-candidate", candidate_sha256: `sha256:${sha256Hex(raw)}` };
+  const { dir } = await composeAndCheck(v.spec, provenanceOf(request));
+  rmSync(dir, { recursive: true, force: true });
   if (!validateRequest(request).ok) throw new Failure("internal: the verified request does not validate");
   mkdirSync(dirname(resolve(out)), { recursive: true });
   writeFileSync(out, stableJson(request));
@@ -346,7 +371,7 @@ function cmdCompose(requestPath: string, out: string): void {
   const { value } = readJson(requestPath, 256 * 1024);
   const v = validateRequest(value);
   if (!v.ok) throw new Failure(`the request is not valid:\n- ${v.errors.join("\n- ")}`);
-  const comp = compose(v.request.spec);
+  const comp = compose(v.request.spec, provenanceOf(v.request));
   for (const [name, text] of Object.entries(comp.files)) {
     mkdirSync(dirname(join(out, name)), { recursive: true });
     writeFileSync(join(out, name), text);

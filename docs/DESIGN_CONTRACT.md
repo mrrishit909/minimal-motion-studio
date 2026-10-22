@@ -58,11 +58,14 @@ no third-party requests and carries no font licence.
 ## Layout
 
 - 1440: wordmark and navigation across the top; a 400 px control column (step list, then the active
-  step's controls, then the export actions) beside a wide stage. Paint chips and pairings sit under
-  the stage.
-- 768: the stage first at full width, steps as a two-row segmented list, controls below.
-- 390: the stage first (the phone preview fits the width; larger devices scale down and say so),
-  steps in a 3 x 2 grid, controls stacked, export actions full width. Nothing important is hidden.
+  step's controls, then the export actions) beside a wide, sticky stage that always fits the viewport.
+  Paint chips and the contrast pairings live in the Palette step, next to the seeds that produce them
+  (an earlier version put them under the stage, where a sticky column taller than the screen hid them).
+- 768: the stage first at full width (first in focus order too), then the six steps in one row and the
+  controls below.
+- 390: the stage first (the phone preview fits the width; larger devices scale down and say so), steps
+  in a 3 x 2 grid, controls stacked, export actions full width, every control at least 44 px tall.
+  Nothing important is hidden.
 
 ## Motion (explains change, never decoration)
 

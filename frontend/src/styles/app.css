@@ -111,6 +111,8 @@
 .mm-root .mm-btn-quiet { border-color: transparent; background: transparent; min-height: 36px; padding: 6px 10px; color: var(--mm-ink-2); }
 .mm-root .mm-btn-wide { width: 100%; min-height: 48px; }
 .mm-root .mm-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.mm-root .mm-seg-field { display: grid; gap: 6px; justify-items: start; min-width: 0; }
+.mm-root .mm-seg-label { font-size: 13px; font-weight: 600; color: var(--mm-ink-2); }
 .mm-root .mm-segmented { position: relative; display: inline-flex; flex-wrap: nowrap; max-width: 100%; justify-self: start; padding: 3px; gap: 2px; border: 1px solid var(--mm-control); border-radius: calc(var(--mm-r-control) + 3px); background: var(--mm-raised); }
 .mm-root .mm-segmented button { position: relative; z-index: 1; min-height: 36px; padding: 4px 12px; border: 0; border-radius: var(--mm-r-control); background: transparent; color: var(--mm-ink-2); font: inherit; cursor: pointer; transition: color var(--mm-fast); }
 .mm-root .mm-segmented button:hover { color: var(--mm-ink); }
@@ -180,7 +182,9 @@
 .mm-root .mm-curve-axis { stroke: var(--mm-line); stroke-width: 1; }
 
 /* Studio layout */
-.mm-root .mm-studio { display: grid; grid-template-columns: minmax(320px, 400px) minmax(0, 1fr); gap: 32px; padding: 0 var(--mm-gutter); align-items: start; }
+.mm-root .mm-studio { display: grid; grid-template-columns: minmax(320px, 400px) minmax(0, 1fr); grid-template-areas: "controls stage"; gap: 32px; padding: 0 var(--mm-gutter); align-items: start; }
+.mm-root .mm-controls { grid-area: controls; }
+.mm-root .mm-stage-column { grid-area: stage; }
 .mm-root .mm-controls { display: grid; gap: 28px; min-width: 0; }
 .mm-root .mm-steps ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
 .mm-root .mm-steps a { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--mm-line); border-radius: var(--mm-r-control); text-decoration: none; color: var(--mm-ink-2); background: var(--mm-raised); transition: border-color var(--mm-fast), color var(--mm-fast), background-color var(--mm-med); }
@@ -268,13 +272,13 @@
 
 /* Tablet: the stage leads, controls follow at full width. */
 @media (max-width: 1100px) {
-  .mm-root .mm-studio { grid-template-columns: minmax(0, 1fr); }
-  .mm-root .mm-stage-column { order: -1; position: static; }
+  .mm-root .mm-studio { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stage" "controls"; }
+  .mm-root .mm-stage-column { position: static; }
   .mm-root .mm-steps ol { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .mm-root .mm-steps a { justify-content: center; }
   .mm-root .mm-controls { grid-template-columns: minmax(0, 1fr); }
   .mm-root .mm-history-grid { grid-template-columns: minmax(0, 1fr); }
-  .mm-root .mm-run-list ol { grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); overflow-x: auto; padding-bottom: 6px; }
+  .mm-root .mm-run-list ol { grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); overflow-x: auto; padding: 6px; }
 }
 
 /* Phone: one column, steps in a 3 x 2 grid, pairings stack. */
@@ -296,6 +300,9 @@
   .mm-root .mm-pair-verdict { grid-area: v; }
   .mm-root .mm-chips { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
   .mm-root .mm-ways > li { padding-left: 0; padding-top: 46px; }
+  /* Touch layout: every control at least 44 px tall (design contract). */
+  .mm-root .mm-segmented button, .mm-root .mm-btn, .mm-root .mm-btn-quiet, .mm-root .mm-switch { min-height: 44px; }
+  .mm-root .mm-export-row .mm-btn { flex: 1 1 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/mrrishit909/minimal-motion-studio/schemas/outputs.schema.json",
   "title": "Minimal Motion Studio run outputs",
-  "description": "One $defs entry per JSON result file written by `node src/engine/cli.ts run` (manifest.json, summary.json, review.json); validate a file with {\"$ref\": \"#/$defs/<name>\"}. JSON files are written with sorted keys, two-space indent and a final newline; they hold no wall-clock time and no absolute path. input_manifest_hash is sha256 over the canonical request JSON: keys sorted, separators ',' and ':', every character outside printable ASCII escaped as lower-case \\uXXXX (byte-identical to Python json.dumps(request, sort_keys=True, separators=(',', ':'))).",
+  "description": "One $defs entry per JSON result file written by `node src/engine/cli.ts run` (manifest.json, summary.json, review.json); validate a file with {\"$ref\": \"#/$defs/<name>\"}. JSON files are written with sorted keys, two-space indent and a final newline; they hold no wall-clock time and no absolute path. input_manifest_hash is sha256 over the canonical request JSON: keys sorted, separators ',' and ':', every character outside printable ASCII escaped as lower-case \\uXXXX. This equals Python json.dumps(request, sort_keys=True, separators=(',', ':')) when the request's numbers are plain integers; a number written as 17.0 or 1e2 still validates but hashes differently in the two languages.",
   "$defs": {
     "sha": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
     "count": { "type": "integer", "minimum": 0 },

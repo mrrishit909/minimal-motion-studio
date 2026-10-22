@@ -113,7 +113,7 @@ export function BriefPanel({ studio }: { studio: Studio }) {
         <Field studio={studio} path={["brand", "name"]} label="Brand name" max={40} />
         <Field studio={studio} path={["brand", "tagline"]} label="Tagline" max={90} hint="One line under the name. The page's main heading." />
         <Field studio={studio} path={["brand", "summary"]} label="Summary" max={320} multiline />
-        {spec.template === "launch" && <Field studio={studio} path={["brand", "note"]} label="Announcement" max={160} hint="For example the launch date. Leave empty to omit." />}
+        <Field studio={studio} path={["brand", "note"]} label="Announcement" max={160} hint="A short line above the main heading, such as a launch date or a booking note. Leave it empty to leave it out." />
       </Group>
       <Group title="Call to action">
         <Field studio={studio} path={["brand", "cta_label"]} label="Button label" max={28} hint="Say what happens, for example Book a visit." />
@@ -328,7 +328,8 @@ export function ComponentsPanel({ studio }: { studio: Studio }) {
 
 function Curve({ preset }: { preset: Preset }) {
   const path = useRef<SVGPathElement>(null);
-  const pts = curvePoints(preset, 48);
+  // Still never moves: draw a flat line at the resting position rather than an easing curve.
+  const pts: [number, number][] = preset === "still" ? [[0, 1], [1, 1]] : curvePoints(preset, 48);
   const xs = pts.map(([x]) => x);
   const ys = pts.map(([, y]) => y);
   const minY = Math.min(0, ...ys), maxY = Math.max(1, ...ys);

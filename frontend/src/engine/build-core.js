@@ -181,6 +181,9 @@ export function tokensCss(t) {
   lines.push(`--radius-control: ${t.radius.control}px;`, `--radius-surface: ${t.radius.surface}px;`, `--radius-pill: ${t.radius.pill}px;`);
   lines.push(`--m-preset: ${t.motion.preset};`, `--m-duration: ${t.motion.duration_ms}ms;`, `--m-fast: ${t.motion.fast_ms}ms;`);
   lines.push(`--m-easing: ${t.motion.easing};`, `--m-distance: ${t.motion.distance_px}px;`, `--m-stagger: ${t.motion.stagger_ms}ms;`);
+  // Hover lift and press feedback follow the preset: Still moves nothing, not even on press.
+  const still = t.motion.preset === "still";
+  lines.push(`--m-lift: ${still ? "none" : "translateY(-1px)"};`, `--m-press: ${still ? "none" : "translateY(1px) scale(0.97)"};`);
   // Fixed layout constants: touch target (WCAG 2.5.8 asks 24px; 44px is used), page width, gutters, lines.
   lines.push("--target: 2.75rem;", "--page: 74rem;", "--gutter: clamp(1rem, 5vw, 3.5rem);", "--line: 1px;", "--ring: 2px;");
   return `:root {\n${lines.map((l) => `  ${l}`).join("\n")}\n}\n`;

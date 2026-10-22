@@ -17,7 +17,7 @@ const SPRING =
 export const MOTION_PRESETS: Record<Preset, MotionPreset> = {
   still: {
     label: "Still",
-    description: "No motion at all. Everything is in place when the page opens and nothing moves on scroll or press.",
+    description: "No motion at all. Everything is in place when the page opens, and nothing moves on scroll, hover or press.",
     duration_ms: 0,
     fast_ms: 0,
     easing: "linear",

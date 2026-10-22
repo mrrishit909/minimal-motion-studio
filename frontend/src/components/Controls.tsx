@@ -40,6 +40,8 @@ export function Segmented<T extends string>({
 }) {
   const { container, style } = useIndicator<HTMLDivElement>('button[aria-pressed="true"]', value);
   return (
+    <div className="mm-seg-field">
+    <span className="mm-seg-label" aria-hidden>{label}</span>
     <div className="mm-segmented" role="group" aria-label={label} ref={container}>
       {style && <span className="mm-seg-thumb" style={style} aria-hidden />}
       {options.map((o) => (
@@ -47,6 +49,7 @@ export function Segmented<T extends string>({
           {o.label}
         </button>
       ))}
+    </div>
     </div>
   );
 }

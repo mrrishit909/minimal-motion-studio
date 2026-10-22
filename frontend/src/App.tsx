@@ -8,7 +8,7 @@ import { ago } from "./lib/format";
 import { parseRoute, type Route, routeHref, useRoute } from "./routing";
 import { StudioView } from "./studio/StudioView";
 import type { DeviceId } from "./studio/Stage";
-import { useStudio } from "./studio/useStudio";
+import { loadEngine, useStudio } from "./studio/useStudio";
 import { HistoryView } from "./views/History";
 import { AboutView, RequestView } from "./views/Pages";
 import "./styles/app.css";
@@ -68,9 +68,12 @@ export function MinimalMotionStudioApp(props: Partial<AppConfig>) {
     main.current?.querySelector<HTMLElement>("[data-section-heading]")?.focus({ preventScroll: true });
   }, [route.view]);
 
-  const loadIntoStudio = (spec: Spec) => {
-    studio.replace(spec);
+  const loadIntoStudio = async (spec: Spec) => {
+    const result = (await loadEngine()).validateSpec(spec);
+    if (!result.ok) return false;
+    studio.replace(result.spec);
     navigate({ view: "studio", step: "brief" });
+    return true;
   };
 
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
