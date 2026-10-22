@@ -1,0 +1,83 @@
+{
+  "engine": "4ae929799c5e5e4e",
+  "params": {
+    "origin": "fixture",
+    "spec": {
+      "brand": {
+        "contact": "hello@fieldnote.example",
+        "cta_href": "mailto:hello@fieldnote.example",
+        "cta_label": "Book a survey",
+        "hours": "Site visits Tuesday to Friday",
+        "location": "Studio 4, Tannery Yard",
+        "name": "Fieldnote Studio",
+        "note": "Booking surveys for spring planting now",
+        "summary": "A two-person garden design practice. We survey the light, soil and drainage first, then draw a planting plan you can build in stages, with or without us.",
+        "tagline": "Gardens planned around how you actually use them"
+      },
+      "components": {
+        "button": "outline",
+        "header": "inline",
+        "radius": "none",
+        "surface": "outlined"
+      },
+      "faqs": [
+        {
+          "a": "No. We design and oversee. We can recommend landscapers we have worked with, or brief one you already trust.",
+          "q": "Do you build the gardens yourselves?"
+        },
+        {
+          "a": "Up to about an hour from the studio. Further visits are quoted separately before anything is booked.",
+          "q": "How far do you travel?"
+        },
+        {
+          "a": "A fixed fee, agreed before the visit. If you go on to commission a planting plan, the survey fee is taken off it.",
+          "q": "What does a survey cost?"
+        }
+      ],
+      "items": [
+        {
+          "meta": "Half day",
+          "text": "A half-day visit to measure light, soil and drainage, followed by a written summary within a week.",
+          "title": "Garden survey"
+        },
+        {
+          "meta": "2 to 3 weeks",
+          "text": "A scaled plan with a plant list, sourcing notes and a first-year care calendar.",
+          "title": "Planting plan"
+        },
+        {
+          "meta": "Per project",
+          "text": "We brief the landscaper you choose and check the work at each stage, so the plan survives the build.",
+          "title": "Build oversight"
+        }
+      ],
+      "motion": {
+        "preset": "gentle",
+        "speed_pct": 100,
+        "stagger_ms": 60
+      },
+      "palette": {
+        "accent": "#646548",
+        "canvas": "#FFF6E8",
+        "ink": "#29201B",
+        "mode": "light",
+        "support": "#E8D7BF"
+      },
+      "schema_version": "1.0",
+      "space": {
+        "base_px": 8,
+        "density": "airy"
+      },
+      "template": "studio",
+      "type": {
+        "base_px": 17,
+        "body": "humanist",
+        "heading": "old-style",
+        "heading_weight": 500,
+        "measure_ch": 64,
+        "ratio": "1.333"
+      }
+    }
+  },
+  "request_id": "f3a3279ced5cd4e8"
+}
