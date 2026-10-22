@@ -1,0 +1,754 @@
+{
+  "target": "https://mrrishit909.github.io/minimal-motion-studio/",
+  "status": "passed",
+  "passed": 63,
+  "failed": 0,
+  "skipped": 30,
+  "flaky": 0,
+  "tests": [
+    {
+      "title": "MMS-01: one long word in a brief field (a German compound item title) makes the generated page scroll sideways at 390 px",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1375
+    },
+    {
+      "title": "MMS-02: the history review table says 'not recorded' for overflow, keyboard and reduced motion although review.json records them",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 66
+    },
+    {
+      "title": "MMS-03: 'Next: <step>' moves keyboard focus to a heading that is scrolled thousands of pixels out of view",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 643
+    },
+    {
+      "title": "MMS-04: the announcement line renders on Studio and Shopfront pages but its field is offered only for Launch",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 57
+    },
+    {
+      "title": "MMS-06: where the stage is shown first (768 px), its controls come after the whole control column in tab order",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 74
+    },
+    {
+      "title": "MMS-07: studio controls are 36 to 41 px tall on the 390 px touch layout, below the 44 px the design contract promises",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 488
+    },
+    {
+      "title": "MMS-08: segmented control groups (buttons, surfaces, corners, header, mode, template, device) have no visible label",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 60
+    },
+    {
+      "title": "MMS-09: a malformed deep link (#/history/%E0) throws in the router and blanks the whole site",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 61
+    },
+    {
+      "title": "MMS-10: the 'Still' preset says nothing moves on press, but the button still jumps and shrinks when pressed",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 70
+    },
+    {
+      "title": "MMS-16: at 1100 px and below the history run list scrolls (overflow auto) and clips the run link's focus ring on three sides",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 64
+    },
+    {
+      "title": "held: preview and history frames are opaque-origin sandboxes; preview scripts cannot reach the studio, storage or the network",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 78
+    },
+    {
+      "title": "held: hostile palettes render every visible text, hover, edge and focus pairing at or above WCAG minimums, light and dark",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 0
+    },
+    {
+      "title": "held: reduced motion means no animation in the studio, in the preview for such visitors, and in the reduced-motion preview",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 0
+    },
+    {
+      "title": "held: every focusable studio control shows a visible, unobscured focus indicator; the file import opens by keyboard",
+      "project": "mobile-390",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 65
+    },
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3828
+    },
+    {
+      "title": "held: generated pages at 390 px keep every link and question at least 44 x 44 px with no sideways scroll (example content)",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1346
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1485
+    },
+    {
+      "title": "MMS-01: one long word in a brief field (a German compound item title) makes the generated page scroll sideways at 390 px",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 131
+    },
+    {
+      "title": "MMS-02: the history review table says 'not recorded' for overflow, keyboard and reduced motion although review.json records them",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 78
+    },
+    {
+      "title": "MMS-03: 'Next: <step>' moves keyboard focus to a heading that is scrolled thousands of pixels out of view",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 90
+    },
+    {
+      "title": "MMS-04: the announcement line renders on Studio and Shopfront pages but its field is offered only for Launch",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 81
+    },
+    {
+      "title": "MMS-06: where the stage is shown first (768 px), its controls come after the whole control column in tab order",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1353
+    },
+    {
+      "title": "MMS-07: studio controls are 36 to 41 px tall on the 390 px touch layout, below the 44 px the design contract promises",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 68
+    },
+    {
+      "title": "MMS-08: segmented control groups (buttons, surfaces, corners, header, mode, template, device) have no visible label",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 66
+    },
+    {
+      "title": "MMS-09: a malformed deep link (#/history/%E0) throws in the router and blanks the whole site",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 54
+    },
+    {
+      "title": "MMS-10: the 'Still' preset says nothing moves on press, but the button still jumps and shrinks when pressed",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 102
+    },
+    {
+      "title": "MMS-16: at 1100 px and below the history run list scrolls (overflow auto) and clips the run link's focus ring on three sides",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 897
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3223
+    },
+    {
+      "title": "held: preview and history frames are opaque-origin sandboxes; preview scripts cannot reach the studio, storage or the network",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 72
+    },
+    {
+      "title": "held: hostile palettes render every visible text, hover, edge and focus pairing at or above WCAG minimums, light and dark",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 1
+    },
+    {
+      "title": "held: reduced motion means no animation in the studio, in the preview for such visitors, and in the reduced-motion preview",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 1
+    },
+    {
+      "title": "held: every focusable studio control shows a visible, unobscured focus indicator; the file import opens by keyboard",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 68
+    },
+    {
+      "title": "held: generated pages at 390 px keep every link and question at least 44 x 44 px with no sideways scroll (example content)",
+      "project": "tablet-768",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 57
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2957
+    },
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2828
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1230
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1389
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1295
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1094
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 584
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3004
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1377
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 794
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1132
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3047
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1231
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1312
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1116
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 4087
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 725
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 674
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1322
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 754
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2438
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1193
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1970
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "mobile-390",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1837
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3835
+    },
+    {
+      "title": "MMS-01: one long word in a brief field (a German compound item title) makes the generated page scroll sideways at 390 px",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 92
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 972
+    },
+    {
+      "title": "MMS-02: the history review table says 'not recorded' for overflow, keyboard and reduced motion although review.json records them",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 792
+    },
+    {
+      "title": "MMS-03: 'Next: <step>' moves keyboard focus to a heading that is scrolled thousands of pixels out of view",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 62
+    },
+    {
+      "title": "MMS-04: the announcement line renders on Studio and Shopfront pages but its field is offered only for Launch",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 831
+    },
+    {
+      "title": "MMS-06: where the stage is shown first (768 px), its controls come after the whole control column in tab order",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 88
+    },
+    {
+      "title": "MMS-07: studio controls are 36 to 41 px tall on the 390 px touch layout, below the 44 px the design contract promises",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 93
+    },
+    {
+      "title": "MMS-08: segmented control groups (buttons, surfaces, corners, header, mode, template, device) have no visible label",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 682
+    },
+    {
+      "title": "MMS-09: a malformed deep link (#/history/%E0) throws in the router and blanks the whole site",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 335
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2510
+    },
+    {
+      "title": "MMS-10: the 'Still' preset says nothing moves on press, but the button still jumps and shrinks when pressed",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1130
+    },
+    {
+      "title": "MMS-16: at 1100 px and below the history run list scrolls (overflow auto) and clips the run link's focus ring on three sides",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 95
+    },
+    {
+      "title": "held: preview and history frames are opaque-origin sandboxes; preview scripts cannot reach the studio, storage or the network",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 838
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2207
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "tablet-768",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1619
+    },
+    {
+      "title": "studio: stage shows the composed page in a sandboxed frame; accessible, no overflow",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3042
+    },
+    {
+      "title": "brief: editing a field updates the preview; a bad link is explained beside its field",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1457
+    },
+    {
+      "title": "palette: a low-contrast seed is adjusted, listed, and every pairing passes",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2927
+    },
+    {
+      "title": "held: hostile palettes render every visible text, hover, edge and focus pairing at or above WCAG minimums, light and dark",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 11986
+    },
+    {
+      "title": "type, space and components: controls change the composed stylesheet",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3387
+    },
+    {
+      "title": "held: reduced motion means no animation in the studio, in the preview for such visitors, and in the reduced-motion preview",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2244
+    },
+    {
+      "title": "device widths: the frame and its ruler follow phone, tablet and desktop",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1374
+    },
+    {
+      "title": "held: every focusable studio control shows a visible, unobscured focus indicator; the file import opens by keyboard",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 2304
+    },
+    {
+      "title": "motion: presets, replay, and a reduced-motion preview with no animations",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1558
+    },
+    {
+      "title": "held: generated pages at 390 px keep every link and question at least 44 x 44 px with no sideways scroll (example content)",
+      "project": "desktop-1440",
+      "status": "skipped",
+      "outcome": "skipped",
+      "expected": "skipped",
+      "duration": 67
+    },
+    {
+      "title": "export: the downloaded package builds on its own and matches the preview byte for byte",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 886
+    },
+    {
+      "title": "tokens propagate: editing tokens.json in the export changes every use on rebuild",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 499
+    },
+    {
+      "title": "injection: hostile brief text stays text, in the preview and in the export",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1069
+    },
+    {
+      "title": "import: a hostile or malformed brief is refused and nothing changes",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 616
+    },
+    {
+      "title": "keyboard: skip link, visible focus, steps by keyboard",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1001
+    },
+    {
+      "title": "dark theme: applies everywhere and stays accessible",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 3057
+    },
+    {
+      "title": "reduced motion: the studio itself does not animate",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 447
+    },
+    {
+      "title": "history: published run with its origin, review, pairings and page; its brief opens in the studio",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1960
+    },
+    {
+      "title": "states: history loading, empty, error with retry, stale",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1789
+    },
+    {
+      "title": "honesty: no AI control for visitors; AI described as owner-only; pages and preview image",
+      "project": "desktop-1440",
+      "status": "passed",
+      "outcome": "expected",
+      "expected": "passed",
+      "duration": 1417
+    }
+  ]
+}
