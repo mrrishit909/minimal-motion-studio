@@ -34,6 +34,14 @@ jobs:
           E2E_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           E2E_EVIDENCE_DIR: ${{ github.workspace }}/evidence/e2e
         run: npm run e2e
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        if: always()
+        with:
+          version: "0.10.9"
+          enable-cache: false
+      - name: Python environment for the schema parity checks (Ajv against the harness's jsonschema)
+        if: always()
+        run: uv sync --frozen --python 3.12 --no-dev
       - name: Engine and export gates (deterministic, read-only job)
         if: always()
         working-directory: frontend
