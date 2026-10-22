@@ -1,6 +1,13 @@
 {
   "releases": [
     {
+      "created_at": "2026-10-22T07:24:04Z",
+      "release_id": "minimal-motion-studio-20261022T072404Z-f15ee88",
+      "run_id": "minimal-motion-studio-20261022T064349Z-14a65095-a1",
+      "source_commit": "f15ee88f9ca3311dd476b98a950626bab0984446",
+      "status": "released"
+    },
+    {
       "created_at": "2026-10-22T06:57:56Z",
       "release_id": "minimal-motion-studio-20261022T065756Z-b29a6c8",
       "run_id": "minimal-motion-studio-20261022T064349Z-14a65095-a1",
