@@ -1,0 +1,7 @@
+{
+  "candidate_sha256": null,
+  "engine": "minimal-motion-studio 1.0.0",
+  "input_manifest_hash": "sha256:2fc145d0e55b9a8e01b19f075acf70b5ebde8b565b62cccb6618228548a532b2",
+  "origin": "fixture",
+  "schema_version": "1.0"
+}
