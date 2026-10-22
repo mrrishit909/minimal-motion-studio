@@ -1,9 +1,8 @@
 // Runs the pinned Lighthouse CLI (devDependency) against a URL with Playwright's Chromium and writes the
 // {passed, failed} summary the Outcome Verification Loop reads. Thresholds are fixed here and recorded.
-// Gating runs: phone with Lighthouse's mobile profile under applied (devtools) throttling, which measures
-// real paints on the throttled connection and CPU; desktop with the desktop preset. The default simulated
-// phone run is recorded as information only: its model charges the web font's download to text that the
-// browser actually paints at once in the fallback face (font-display: optional), so it overstates LCP.
+// Gating runs use Lighthouse's default method: simulated throttling with the mobile profile, and the
+// desktop preset. A phone run with applied (devtools) throttling is recorded as information only: on a
+// CI runner it adds the runner's real network path to the throttled one, so it varies run to run.
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -19,20 +18,20 @@ const THRESHOLDS = {
 const METRIC_LIMITS = { "largest-contentful-paint": 2500, "cumulative-layout-shift": 0.1 };
 const checks = [];
 const info = [];
-for (const form of ["mobile", "desktop", "mobile-simulated"]) {
+for (const form of ["mobile", "desktop", "mobile-applied"]) {
   const out = join(outDir, `${form}.json`);
   const args = [url, `--chrome-path=${chromium.executablePath()}`, "--chrome-flags=--headless=new --no-sandbox", "--output=json",
     `--output-path=${out}`, "--only-categories=performance,accessibility,best-practices,seo", "--quiet"];
   if (form === "desktop") args.push("--preset=desktop");
-  if (form === "mobile") args.push("--throttling-method=devtools");
-  if (form === "mobile-simulated") {
+  if (form === "mobile-applied") {
+    args.push("--throttling-method=devtools");
     try {
       execFileSync(bin, args, { stdio: "inherit", timeout: 240_000 });
       const lhr = JSON.parse(readFileSync(out, "utf8"));
-      info.push({ title: "mobile (simulated throttling) performance", value: lhr.categories.performance?.score ?? null });
-      info.push({ title: "mobile (simulated throttling) largest-contentful-paint", value: lhr.audits["largest-contentful-paint"]?.numericValue ?? null });
+      info.push({ title: "mobile (applied throttling) performance", value: lhr.categories.performance?.score ?? null });
+      info.push({ title: "mobile (applied throttling) largest-contentful-paint", value: lhr.audits["largest-contentful-paint"]?.numericValue ?? null });
     } catch (err) {
-      info.push({ title: "mobile (simulated throttling) run", value: null, error: String(err).slice(0, 300) });
+      info.push({ title: "mobile (applied throttling) run", value: null, error: String(err).slice(0, 300) });
     }
     continue;
   }
