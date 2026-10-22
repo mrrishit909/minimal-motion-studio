@@ -1,0 +1,31 @@
+{
+  "attempt": 1,
+  "completed_at": null,
+  "created_at": "2026-10-22T07:26:15Z",
+  "error_summary": null,
+  "evidence_paths": [],
+  "input_manifest_hash": null,
+  "parent_run_id": null,
+  "project": "minimal-motion-studio",
+  "request_id": "75d0ae8d59e6fbcb",
+  "request_source": {
+    "actor": "github-actions[bot]",
+    "issue_number": 2,
+    "type": "issue"
+  },
+  "resource_usage_summary": {
+    "inference": {
+      "usd": null,
+      "used": false
+    },
+    "output_bytes": null,
+    "wall_seconds": null
+  },
+  "result_paths": [],
+  "run_id": "minimal-motion-studio-20261022T072615Z-75d0ae8d-a1",
+  "schema_version": "1.0",
+  "source_commit": "f15ee88f9ca3311dd476b98a950626bab0984446",
+  "started_at": "2026-10-22T07:26:15Z",
+  "status": "running",
+  "workflow_run_id": 39740454098
+}

@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_id": "minimal-motion-studio-20261022T072615Z-75d0ae8d-a1",
+      "status": "running"
+    }
+  ],
+  "latest_status": "running",
+  "params_hash": "sha256:c3a8f9e688b23d777dfa0c2594aa544b1f4c07fee01b3edf7203762522039166",
+  "request_id": "75d0ae8d59e6fbcb"
+}
