@@ -1,10 +1,12 @@
 {
   "attempt": 1,
-  "completed_at": null,
+  "completed_at": "2026-10-22T08:33:31Z",
   "created_at": "2026-10-22T08:32:20Z",
   "error_summary": null,
-  "evidence_paths": [],
-  "input_manifest_hash": null,
+  "evidence_paths": [
+    "https://github.com/mrrishit909/minimal-motion-studio/actions/runs/39748463108"
+  ],
+  "input_manifest_hash": "sha256:2fc145d0e55b9a8e01b19f075acf70b5ebde8b565b62cccb6618228548a532b2",
   "parent_run_id": null,
   "project": "minimal-motion-studio",
   "request_id": "f3a3279ced5cd4e8",
@@ -18,14 +20,24 @@
       "usd": null,
       "used": false
     },
-    "output_bytes": null,
-    "wall_seconds": null
+    "output_bytes": 93513,
+    "wall_seconds": 71.0
   },
-  "result_paths": [],
+  "result_paths": [
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/adjustments.json",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/manifest.json",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/package.zip",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/report.md",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/review.json",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/site.html",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/spec.json",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/summary.json",
+    "runs/minimal-motion-studio-20261022T083220Z-f3a3279c-a1/tokens.json"
+  ],
   "run_id": "minimal-motion-studio-20261022T083220Z-f3a3279c-a1",
   "schema_version": "1.0",
   "source_commit": "9a1ca587be7a808771f5780abb3c7a61f9e123f4",
   "started_at": "2026-10-22T08:32:20Z",
-  "status": "running",
+  "status": "completed",
   "workflow_run_id": 39748463108
 }

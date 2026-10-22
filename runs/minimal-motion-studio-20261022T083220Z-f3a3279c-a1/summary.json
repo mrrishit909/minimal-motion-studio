@@ -1,0 +1,60 @@
+{
+  "counts": {
+    "adjustments": 0,
+    "axe_violations": 0,
+    "console_errors": 0,
+    "failed_requests": 0,
+    "overflow_widths": 0,
+    "pairings": 16,
+    "pairings_pass": 16,
+    "widths": 3
+  },
+  "export_identical": true,
+  "files": [
+    {
+      "bytes": 3,
+      "name": "adjustments.json",
+      "sha256": "sha256:37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "bytes": 224,
+      "name": "manifest.json",
+      "sha256": "sha256:25c93f8a857d79ca08a3c8e9705127d4fa973209afcddd58236a6ee200e290fd"
+    },
+    {
+      "bytes": 52377,
+      "name": "package.zip",
+      "sha256": "sha256:a152d3dc13930288d82fc837d1d76cf7f770c0e55ad1986326c2d013e7f9adad"
+    },
+    {
+      "bytes": 2352,
+      "name": "report.md",
+      "sha256": "sha256:73028ba114e285282b837894d113cbbae595fe61735b13ce538e4084474b7b15"
+    },
+    {
+      "bytes": 1160,
+      "name": "review.json",
+      "sha256": "sha256:baa6bb3068c233fde8b7c9406a4ef4e3cdfd4ae90030b53899e2cfd1a6e9794f"
+    },
+    {
+      "bytes": 27941,
+      "name": "site.html",
+      "sha256": "sha256:90946d4532decfd7976fc1827573fee38b26c3d7f5c7699c11d2691e4cb9ae83"
+    },
+    {
+      "bytes": 2283,
+      "name": "spec.json",
+      "sha256": "sha256:7cd592c95df5c932f9676f2803024291d2ae1c029e374ce023422752cc0aeb38"
+    },
+    {
+      "bytes": 5450,
+      "name": "tokens.json",
+      "sha256": "sha256:80b1f067a99335e618d884b104bb936addbf21409ffdb3f063f73878cb64fd75"
+    }
+  ],
+  "headline": "Studio template for Fieldnote Studio: 16 of 16 contrast pairings pass, 0 axe violations at 3 widths, export builds identically.",
+  "motion_preset": "gentle",
+  "origin": "fixture",
+  "schema_version": "1.0",
+  "template": "studio"
+}
